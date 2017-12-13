@@ -108,7 +108,7 @@ public class DataBaseAccess {
      */
     private boolean checkCredentials() {
         LoginScreen myLogin = new LoginScreen();
-        //MainApplication main = new MainApplication();
+        ApplicationMenus clearThis = new ApplicationMenus();
         try {
             stmt = con.createStatement();
         } catch (SQLException ex) {
@@ -150,10 +150,15 @@ public class DataBaseAccess {
                             myTimeThread.delay(1000);
                         }
                         System.out.printf("\n");
+                        getdbDisConnect();
+                        myTimeThread.delay(1000);
                         myLogin.getScannerClose();
                         System.exit(0);
                     }
-                    System.out.println("wrong Credentials!Please try again");
+                    clearThis.clearConsole();
+                    System.out.println("\n\n*-------------------------------------------------*");
+                    System.out.println("|  NEW MESSAGE: Wrong Credentials! Please retry...|");
+                    System.out.println("*-------------------------------------------------*\n\n");
                     i++;
                 }
             }
