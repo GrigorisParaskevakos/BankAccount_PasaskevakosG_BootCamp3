@@ -102,7 +102,12 @@ public class ApplicationMenus {
                     System.out.println("*---------------------------------------*\n\n");
                     break;
                 case "6":
-                    System.out.println("Bye!...");
+                    DelayThread myTimeThread = new DelayThread();
+                    System.out.printf("Private Banking System is shutting down");
+                    for (int count = 5; count > 0; count--) {
+                        System.out.printf(".");
+                        myTimeThread.delay(1000);
+                    }
                     myLogin.getScannerClose();
                     myDB.getdbDisConnect();
                     System.exit(0);
@@ -196,7 +201,12 @@ public class ApplicationMenus {
                     System.out.println("choise4");
                     break;
                 case "5":
-                    System.out.println("Bye!...");
+                    DelayThread myTimeThread = new DelayThread();
+                    System.out.printf("Private Banking System is shutting down");
+                    for (int count = 5; count > 0; count--) {
+                        System.out.printf(".");
+                        myTimeThread.delay(1000);
+                    }
                     myLogin.getScannerClose();
                     myDB.getdbDisConnect();
                     System.exit(0);

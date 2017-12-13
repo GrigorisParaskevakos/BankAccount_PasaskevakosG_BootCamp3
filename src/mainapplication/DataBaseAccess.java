@@ -97,6 +97,8 @@ public class DataBaseAccess {
     void getdbDisConnect() {
         dbDisConnect();
         System.out.println("Disconnected!");
+        DelayThread myTimeThread = new DelayThread();
+        myTimeThread.delay(1500);
     }
 
     /**
@@ -138,8 +140,10 @@ public class DataBaseAccess {
                     if (i == 2) {
                         flag1 = true;
                         System.out.println("You have enter 3 times wrong pin, come back later....\n");
+                        DelayThread myTimeThread = new DelayThread();
                         for (int count = 5; count > 0; count--) {
                             System.out.printf("Application will close in " + count + "sec\n\n");
+                            myTimeThread.delay(1000);
                         }
                         myLogin.getScannerClose();
                         System.exit(0);

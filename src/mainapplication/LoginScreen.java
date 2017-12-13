@@ -6,6 +6,9 @@
 package mainapplication;
 
 import java.util.Scanner;
+import java.util.Scanner;
+import java.io.Console;
+import java.util.Arrays;
 
 /**
  *
@@ -22,10 +25,14 @@ public class LoginScreen {
      */
     private void userCredentials() {
         Scanner input = new Scanner(System.in, "utf-8");
-        System.out.print("Username: ");
+        Console console = System.console();
+        console.printf("Username: ");
         this.username = input.nextLine();
-        System.out.print("Password: ");
-        this.password = input.nextLine();
+
+        //Password Field is not prompted
+        console.printf("Password: ");
+        char[] pass = console.readPassword();
+        this.password = new String(pass);
         System.out.println();
     }
 
