@@ -24,12 +24,14 @@ public class FileAcces extends InternalBankAccounts {
     public String transactionDateStamp() {
         return dateFormat.format(date);
     }
+
     DateFormat dateTimeFormat = new SimpleDateFormat("(dd-MM-yy)HH.mm.ss");
     Date dateTime = new Date();
 
     public String transactionDateTimeStamp() {
         return dateTimeFormat.format(dateTime);
     }
+
     DateFormat dateTimeFormatFile = new SimpleDateFormat("dd/MM/yy | HH:mm:ss");
     Date dateTimeFile = new Date();
 
@@ -80,8 +82,12 @@ public class FileAcces extends InternalBankAccounts {
             writer = new PrintWriter(path + path2 + fileName, "UTF-8");
             writer.println("User-ID: " + getActiveUserID());
             writer.println("User Name: " + getActiveUser());
-            writer.println("Balance: " + getActiveUserAmount() + " €");
-            writer.println("Transaction Date: " + transactionDateTimeStampFile());
+            writer.println("Current Balance: " + getActiveUserAmount() + " €");
+            writer.println(
+                    "Deposit to user with ID: " + getSelectUserID() + " amount of " + getTransactionAmount() + " €");
+            writer.println(
+                    "Withdraw from user with ID: " + getSelectUserID() + " amount of " + getTransactionAmount() + " €");
+            writer.println("Transaction Date Time: " + transactionDateTimeStampFile());
             writer.close();
         } catch (UnsupportedEncodingException ex) {
             ex.printStackTrace();
