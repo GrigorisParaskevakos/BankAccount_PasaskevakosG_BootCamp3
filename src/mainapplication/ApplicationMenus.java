@@ -108,6 +108,7 @@ public class ApplicationMenus {
                     System.out.printf(".");
                     myTimeThread.delay(1000);
                 }
+                System.out.printf("\n");
                 myLogin.getScannerClose();
                 myDB.getdbDisConnect();
                 System.exit(0);
@@ -210,6 +211,7 @@ public class ApplicationMenus {
                     System.out.printf(".");
                     myTimeThread.delay(1000);
                 }
+                System.out.printf("\n");
                 myLogin.getScannerClose();
                 myDB.getdbDisConnect();
                 System.exit(0);
