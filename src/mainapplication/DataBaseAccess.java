@@ -44,6 +44,8 @@ public class DataBaseAccess {
         try {
             //check JDBC driver
             Class.forName("com.mysql.jdbc.Driver");
+            ApplicationMenus clearThis = new ApplicationMenus();
+            clearThis.clearConsole();
             System.out.println("JDBC installed");
         } catch (ClassNotFoundException ex) {
             System.out.println("JDBC went wrong");
@@ -128,7 +130,8 @@ public class DataBaseAccess {
                     System.out.println("User does not exist!");
                 }
                 while (rs.next()) {
-                    if ((myLogin.getusername().equals(rs.getString(2))) && (myLogin.getpassword().equals(rs.getString(3)))) {
+                    if ((myLogin.getusername().equals(rs.getString(2)))
+                            && (myLogin.getpassword().equals(rs.getString(3)))) {
                         DataBaseAccess.activeUser = rs.getString(2);
                         this.activeUserID = rs.getInt(1);
                         this.activeUserAmount = rs.getDouble(4);
@@ -141,10 +144,12 @@ public class DataBaseAccess {
                         flag1 = true;
                         System.out.println("You have enter 3 times wrong pin, come back later....\n");
                         DelayThread myTimeThread = new DelayThread();
+                        System.out.printf("Application will close in ");
                         for (int count = 5; count > 0; count--) {
-                            System.out.printf("Application will close in " + count + "sec\n\n");
+                            System.out.printf(count + "sec...");
                             myTimeThread.delay(1000);
                         }
+                        System.out.printf("\n");
                         myLogin.getScannerClose();
                         System.exit(0);
                     }
