@@ -1,3 +1,3 @@
 chcp 1252
-color 0c
+color 0a
 java -jar MainApplication
