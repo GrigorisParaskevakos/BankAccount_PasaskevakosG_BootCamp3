@@ -135,6 +135,7 @@ public class DataBaseAccess {
                         DataBaseAccess.activeUser = rs.getString(2);
                         this.activeUserID = rs.getInt(1);
                         this.activeUserAmount = rs.getDouble(4);
+                        clearThis.clearConsole();
                         System.out.println("Connected: " + rs.getString(2) + "\n");
                     }
                     flag1 = true;//then user exists
