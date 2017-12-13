@@ -103,7 +103,7 @@ public class ApplicationMenus {
                 break;
             case "6":
                 DelayThread myTimeThread = new DelayThread();
-                System.out.printf("Private Banking System is shutting down");
+                System.out.printf("\nPrivate Banking System is shutting down");
                 for (int count = 5; count > 0; count--) {
                     System.out.printf(".");
                     myTimeThread.delay(1000);
@@ -206,7 +206,7 @@ public class ApplicationMenus {
                 break;
             case "5":
                 DelayThread myTimeThread = new DelayThread();
-                System.out.printf("Private Banking System is shutting down");
+                System.out.printf("\nPrivate Banking System is shutting down");
                 for (int count = 5; count > 0; count--) {
                     System.out.printf(".");
                     myTimeThread.delay(1000);
