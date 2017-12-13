@@ -11,7 +11,7 @@ II) in order to run :
 mysql-connector.jar | Paste to : C:\Program Files\Java\jre1.8.0_151\lib\ext
 
 ######################################################################################################
-**_IRRELEVANT to IDE_**
+**_IRRELEVANT to IDE_(NetBeans)**
 III) to compile and Run:
 (inside the Project's working directory)
 
@@ -40,6 +40,6 @@ IV) to make an executable .bat file :
 
 ######################################################################################################
 
-PS. Do not forget to open and RUN MySQL DB
+PS. Do not forget to open and Start MySQL DB
 
 ######################################################################################################
