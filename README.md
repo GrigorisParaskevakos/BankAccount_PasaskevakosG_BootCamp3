@@ -12,7 +12,7 @@ mysql-connector.jar | Paste to : C:\Program Files\Java\jre1.8.0_151\lib\ext
 
 ######################################################################################################
 **_IRRELEVANT to IDE_(NetBeans)**
-III) to compile and Run:
+III) to compile and Run (Windows):
 (inside the Project's working directory)
 
     Compile the program using javac command:
