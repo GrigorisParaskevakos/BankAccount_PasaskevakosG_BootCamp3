@@ -19,11 +19,14 @@ public class LoginScreen {
     private String username;
     private String password;
     private String userChoice;
+    private String encryptPassword;
+    private String decryptPassword;
 
     /**
      * ask user for Credentials
      */
     private void userCredentials() {
+        AdvancedEncryptionStandard myEncryption = new AdvancedEncryptionStandard();
         Scanner input = new Scanner(System.in, "utf-8");
         Console console = System.console();
         console.printf("Username: ");
@@ -32,7 +35,10 @@ public class LoginScreen {
         //Password Field is not prompted
         console.printf("Password: ");
         char[] pass = console.readPassword();
-        this.password = new String(pass);
+        this.decryptPassword = new String(pass);
+        //ecrypts input user password
+        this.encryptPassword = myEncryption.encrypt(decryptPassword);
+        this.password = encryptPassword;
         System.out.println();
     }
 
