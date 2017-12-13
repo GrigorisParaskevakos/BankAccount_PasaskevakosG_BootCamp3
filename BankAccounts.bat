@@ -1,4 +1,4 @@
 chcp 1252
-color 0a
+color 0b
 
 java -jar MainApplication
