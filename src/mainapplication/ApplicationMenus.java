@@ -109,6 +109,10 @@ public class ApplicationMenus {
             case "6":
                 DelayThread myTimeThread = new DelayThread();
                 System.out.printf("\nPrivate Banking System is shutting down");
+                myAdminAccount.getDepositsView();
+                myAdminAccount.getDepositsViewUsers();
+                myAdminAccount.getWithdrawView();
+                myAdminAccount.getWithdrawViewUsers();
                 myAdminAccount.getDropDepositsView();
                 myAdminAccount.getDropDepositsViewUsers();
                 myAdminAccount.getDropWithdrawView();
@@ -228,6 +232,10 @@ public class ApplicationMenus {
             case "5":
                 DelayThread myTimeThread = new DelayThread();
                 System.out.printf("\nPrivate Banking System is shutting down");
+                myUserAccount.getDepositsView();
+                myUserAccount.getDepositsViewUsers();
+                myUserAccount.getWithdrawView();
+                myUserAccount.getWithdrawViewUsers();
                 myUserAccount.getDropDepositsView();
                 myUserAccount.getDropDepositsViewUsers();
                 myUserAccount.getDropWithdrawView();
