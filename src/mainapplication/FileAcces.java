@@ -87,8 +87,7 @@ public class FileAcces extends InternalBankAccounts {
             writer.println("User-ID: " + getActiveUserID());
             writer.println("User Name: " + getActiveUser());
             writer.println("Current Balance: " + getActiveUserAmount() + " €");
-            writer.println(
-                    "Deposit to user with ID: " + getSelectUserID() + " amount of " + getTransactionAmount() + " €");
+            writer.println("Deposit to user with ID: " + super.getSelectUserID() + " amount of " + super.getTransactionAmount() + " €");
             writer.println("Transaction Date Time: " + transactionDateTimeStampFile());
             writer.close();
         } catch (UnsupportedEncodingException ex) {
@@ -120,8 +119,7 @@ public class FileAcces extends InternalBankAccounts {
             writer.println("User-ID: " + getActiveUserID());
             writer.println("User Name: " + getActiveUser());
             writer.println("Current Balance: " + getActiveUserAmount() + " €");
-            writer.println(
-                    "Withdraw from user with ID: " + getSelectUserID() + " amount of " + getTransactionAmount() + " €");
+            writer.println("Withdraw from user with ID: " + super.getSelectUserID() + " amount of " + super.getTransactionAmount() + " €");
             writer.println("Transaction Date Time: " + transactionDateTimeStampFile());
             writer.close();
         } catch (UnsupportedEncodingException ex) {

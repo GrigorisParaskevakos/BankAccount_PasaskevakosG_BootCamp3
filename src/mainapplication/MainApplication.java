@@ -15,14 +15,16 @@ public class MainApplication {
         DataBaseAccess myDB = new DataBaseAccess();
         LoginScreen myLogin = new LoginScreen();
         ApplicationMenus myMenu = new ApplicationMenus();
+        InternalBankAccounts activeLog = new InternalBankAccounts();
         //Check DB conectivity
         myDB.getdbConnect();
         //Check user conectivity
         myDB.getcheckCredentials();
-        //Create Statements Directory
-        FileAcces userLog = new FileAcces();
-        userLog.getCreateLogDirActiveUser();
-        userLog.getCreateLogFileActiveUser();
+        //Create Statements & Directory
+        activeLog.getDepositsView();
+        activeLog.getDepositsViewUsers();
+        activeLog.getWithdrawView();
+        activeLog.getWithdrawViewUsers();
         //Display Menus
         if (myDB.getActiveUserID() == 1) {
             myMenu.getAdminMenu();
@@ -31,3 +33,4 @@ public class MainApplication {
         }
     }//end main
 }//end MainApplication
+
