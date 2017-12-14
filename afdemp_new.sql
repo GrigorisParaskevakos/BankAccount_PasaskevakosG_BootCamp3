@@ -39,13 +39,14 @@ UNLOCK TABLES;
 CREATE TABLE `deposit_log` (
   `deposit_id` int(11) NOT NULL AUTO_INCREMENT,
   `active_user_id` int(100) unsigned NOT NULL,
-  `passive_us_id` int(11) DEFAULT NULL,
+  `passive_user_id` int(100) unsigned NOT NULL,
   `amount` double DEFAULT NULL,
   `transaction_date_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`deposit_id`),
   KEY `active_user_id` (`active_user_id`),
-  CONSTRAINT `deposit_log_ibfk_1` FOREIGN KEY (`active_user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  CONSTRAINT `deposit_log_ibfk_1` FOREIGN KEY (`active_user_id`) REFERENCES `users` (`id`),
+  CONSTRAINT `deposit_log_ibfk_2` FOREIGN KEY (`passive_user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
 
@@ -58,7 +59,7 @@ UNLOCK TABLES;
 CREATE TABLE `withdraw_log` (
   `withdraw_id` int(11) NOT NULL AUTO_INCREMENT,
   `active_user_id` int(100) unsigned NOT NULL,
-  `passive_us_id` int(100) unsigned NOT NULL,
+  `passive_user_id` int(100) unsigned NOT NULL,
   `amount` double DEFAULT NULL,
   `transaction_date_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`withdraw_id`),

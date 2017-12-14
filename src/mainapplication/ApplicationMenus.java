@@ -33,7 +33,6 @@ public class ApplicationMenus {
             case "1":
                 clearConsole();
                 myAdminAccount.getAccessAdminAccount();
-                //adminLog.getCreateLogFileActiveUser();
                 break;
             case "2":
                 clearConsole();
@@ -97,10 +96,12 @@ public class ApplicationMenus {
 
             case "5":
                 clearConsole();
-                adminLog.getCreateLogDirActiveUser();
-                adminLog.getCreateLogFileActiveUser();
                 myAdminAccount.getInsertDepositLog();
                 myAdminAccount.getInsertWithdrawtLog();
+                myAdminAccount.getDepositsView();
+                myAdminAccount.getDepositsViewUsers();
+                myAdminAccount.getWithdrawView();
+                myAdminAccount.getWithdrawViewUsers();
                 System.out.println("\n\n*---------------------------------------*");
                 System.out.println("|  NEW MESSAGE: Statements Updated!     |");
                 System.out.println("*---------------------------------------*\n\n");
@@ -108,6 +109,10 @@ public class ApplicationMenus {
             case "6":
                 DelayThread myTimeThread = new DelayThread();
                 System.out.printf("\nPrivate Banking System is shutting down");
+                myAdminAccount.getDropDepositsView();
+                myAdminAccount.getDropDepositsViewUsers();
+                myAdminAccount.getDropWithdrawView();
+                myAdminAccount.getDropWithdrawViewUsers();
                 for (int count = 5; count > 0; count--) {
                     System.out.printf(".");
                     myTimeThread.delay(1000);
@@ -140,6 +145,7 @@ public class ApplicationMenus {
         DataBaseAccess myDB = new DataBaseAccess();
         LoginScreen myLogin = new LoginScreen();
         InternalBankAccounts myUserAccount = new InternalBankAccounts();
+        FileAcces userLog = new FileAcces();
         System.out.println("1. View account");
         System.out.println("2. Deposit to Cooperative's (super admin) bank accounts");
         System.out.println("3. Deposit to a Member's bank accounts");
@@ -153,6 +159,7 @@ public class ApplicationMenus {
             case "1":
                 clearConsole();
                 myUserAccount.getAccessUserMembersAccount();
+                userLog.getCreateLogFileActiveUser();
                 break;
             case "2":
                 clearConsole();
@@ -163,6 +170,7 @@ public class ApplicationMenus {
                     clearConsole();
                     myUserAccount.getUpdatePassiveAdminAccount();
                     myUserAccount.getInsertDepositLog();
+                    userLog.getCreateLogFileActiveUser();
                 } else {
                     clearConsole();
                     System.out.println("\n\n*-------------------------------------------------------*");
@@ -191,6 +199,7 @@ public class ApplicationMenus {
                         clearConsole();
                         myUserAccount.getUpdatePassiveAccount();
                         myUserAccount.getInsertDepositLog();
+                        userLog.getCreateLogFileActiveUser();
                     } else {
                         clearConsole();
                         System.out.println("\n\n*-------------------------------------------------------*");
@@ -208,11 +217,18 @@ public class ApplicationMenus {
             case "4":
                 myUserAccount.getInsertDepositLog();
                 myUserAccount.getInsertWithdrawtLog();
-                System.out.println("choise4");
+                myUserAccount.getDepositsView();
+                myUserAccount.getDepositsViewUsers();
+                myUserAccount.getWithdrawView();
+                myUserAccount.getWithdrawViewUsers();
                 break;
             case "5":
                 DelayThread myTimeThread = new DelayThread();
                 System.out.printf("\nPrivate Banking System is shutting down");
+                myUserAccount.getDropDepositsView();
+                myUserAccount.getDropDepositsViewUsers();
+                myUserAccount.getDropWithdrawView();
+                myUserAccount.getDropWithdrawViewUsers();
                 for (int count = 5; count > 0; count--) {
                     System.out.printf(".");
                     myTimeThread.delay(1000);
