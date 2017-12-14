@@ -1,13 +1,18 @@
 package mainapplication;
 
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import static mainapplication.ApplicationMenus.clearConsole;
 import static mainapplication.DataBaseAccess.rs;
+import java.sql.Date;
 
 public class InternalBankAccounts extends DataBaseAccess {
 
@@ -32,8 +37,7 @@ public class InternalBankAccounts extends DataBaseAccess {
             System.out.println("---+-------+-----------------+----------------------------");
             while (rs.next()) {
 
-                System.out.printf("%2d |%5s  |%15f  | %21s%n", this.rs.getInt(1), this.rs.getString(2),
-                        this.rs.getDouble(3), this.rs.getString(4));
+                System.out.printf("%2d |%5s  |%15f  | %21s%n", this.rs.getInt(1), this.rs.getString(2), this.rs.getDouble(3), this.rs.getString(4));
                 System.out.println("---+-------+-----------------+----------------------------");
             }
         } catch (SQLException ex) {
@@ -57,8 +61,7 @@ public class InternalBankAccounts extends DataBaseAccess {
             System.out.println("---+-------+-----------------+----------------------------");
             while (rs.next()) {
                 //System.out.printf(this.rs.getInt(1) + "   | " + this.rs.getString(2) + "  |" + this.rs.getDouble(3) + "   |" + this.rs.getString(4) + "\n");
-                System.out.printf("%2d |%5s  |%15f  | %21s%n", this.rs.getInt(1), this.rs.getString(2),
-                        this.rs.getDouble(3), this.rs.getString(4));
+                System.out.printf("%2d |%5s  |%15f  | %21s%n", this.rs.getInt(1), this.rs.getString(2), this.rs.getDouble(3), this.rs.getString(4));
                 System.out.println("---+-------+-----------------+----------------------------");
             }
         } catch (SQLException ex) {
@@ -98,8 +101,7 @@ public class InternalBankAccounts extends DataBaseAccess {
      */
     private void accessUserMembersAccount() {
         try {
-            String sql3 = "SELECT afdemp_java_1.users.id, afdemp_java_1.users.username, afdemp_java_1.accounts.amount, afdemp_java_1.accounts.transaction_date FROM afdemp_java_1.users, afdemp_java_1.accounts WHERE afdemp_java_1.users.id = afdemp_java_1.accounts.user_id AND afdemp_java_1.users.id = '"
-                    + getActiveUserID() + "'";
+            String sql3 = "SELECT afdemp_java_1.users.id, afdemp_java_1.users.username, afdemp_java_1.accounts.amount, afdemp_java_1.accounts.transaction_date FROM afdemp_java_1.users, afdemp_java_1.accounts WHERE afdemp_java_1.users.id = afdemp_java_1.accounts.user_id AND afdemp_java_1.users.id = '" + getActiveUserID() + "'";
             rs = stmt.executeQuery(sql3);
             System.out.println("\nConnected: " + getActiveUser() + "\nView: All simple users' accouts");
             System.out.println("---+-------+-----------------+----------------------------");
@@ -107,8 +109,7 @@ public class InternalBankAccounts extends DataBaseAccess {
             System.out.println("---+-------+-----------------+----------------------------");
             while (rs.next()) {
                 //System.out.printf(this.rs.getInt(1) + "   | " + this.rs.getString(2) + "  |" + this.rs.getDouble(3) + "   |" + this.rs.getString(4) + "\n");
-                System.out.printf("%2d |%5s  |%15f  | %21s%n", this.rs.getInt(1), this.rs.getString(2),
-                        this.rs.getDouble(3), this.rs.getString(4));
+                System.out.printf("%2d |%5s  |%15f  | %21s%n", this.rs.getInt(1), this.rs.getString(2), this.rs.getDouble(3), this.rs.getString(4));
                 System.out.println("---+-------+-----------------+----------------------------");
             }
         } catch (SQLException ex) {
@@ -186,8 +187,8 @@ public class InternalBankAccounts extends DataBaseAccess {
     void getUpdateActiveAccount() {
         updateActiveAccount();
     }
-    //////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////
 
     //log ActiveUserAmount
     private void insertDepositLog() {
@@ -233,8 +234,8 @@ public class InternalBankAccounts extends DataBaseAccess {
     void getInsertWithdrawtLog() {
         insertWithdrawtLog();
     }
-    //////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////
 
     /**
      * Create Views for deposits
@@ -242,7 +243,7 @@ public class InternalBankAccounts extends DataBaseAccess {
     private void depositsView() {
         try {
             stmt = con.createStatement();
-            String query2 = "CREATE  OR REPLACE VIEW `deposits_view` AS SELECT users.username as 'balance_provider', deposit_log.amount, deposit_log.passive_user_id as 'balance_receiver', deposit_log.transaction_date_time FROM users, afdemp_java_1.deposit_log WHERE users.id = deposit_log.active_user_id";
+            String query2 = "CREATE  OR REPLACE VIEW `deposits_view` AS SELECT users.username as 'balance_provider', deposit_log.amount, deposit_log.passive_user_id as 'balance_receiver', deposit_log.transaction_date_time FROM users, afdemp_java_1.deposit_log WHERE users.id = deposit_log.active_user_id AND NOT (deposit_log.amount = 0)";
             stmt.executeUpdate(query2);
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -278,7 +279,7 @@ public class InternalBankAccounts extends DataBaseAccess {
     private void depositsViewUsers() {
         try {
             stmt = con.createStatement();
-            String query3 = "CREATE  OR REPLACE VIEW `deposits_view_users` AS SELECT deposits_view.balance_provider, deposits_view.amount, users.username as 'receiver', deposits_view.transaction_date_time FROM deposits_view, users WHERE users.id = deposits_view.balance_receiver";
+            String query3 = "CREATE  OR REPLACE VIEW `deposits_view_users` AS SELECT deposits_view.balance_provider, deposits_view.amount, users.username as 'receiver', deposits_view.transaction_date_time FROM deposits_view, users WHERE users.id = deposits_view.balance_receiver AND NOT (deposit_log.amount = 0)";
             stmt.executeUpdate(query3);
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -314,7 +315,7 @@ public class InternalBankAccounts extends DataBaseAccess {
     private void withdrawView() {
         try {
             stmt = con.createStatement();
-            String query2 = "CREATE  OR REPLACE VIEW `withdraw_view` AS SELECT users.username as 'balance_receiver', withdraw_log.amount, withdraw_log.passive_user_id as 'balance_provider', withdraw_log.transaction_date_time FROM users, afdemp_java_1.withdraw_log WHERE users.id = withdraw_log.active_user_id";
+            String query2 = "CREATE  OR REPLACE VIEW `withdraw_view` AS SELECT users.username as 'balance_receiver', withdraw_log.amount, withdraw_log.passive_user_id as 'balance_provider', withdraw_log.transaction_date_time FROM users, afdemp_java_1.withdraw_log WHERE users.id = withdraw_log.active_user_id AND NOT (withdraw_log.amount = 0)";
             stmt.executeUpdate(query2);
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -350,7 +351,7 @@ public class InternalBankAccounts extends DataBaseAccess {
     private void withdrawViewUsers() {
         try {
             stmt = con.createStatement();
-            String query2 = "CREATE  OR REPLACE VIEW `withdraw_view_users` AS SELECT withdraw_view.balance_receiver, withdraw_view.amount, users.username as 'provider', withdraw_view.transaction_date_time FROM withdraw_view, users WHERE users.id = withdraw_view.balance_provider";
+            String query2 = "CREATE  OR REPLACE VIEW `withdraw_view_users` AS SELECT withdraw_view.balance_receiver, withdraw_view.amount, users.username as 'provider', withdraw_view.transaction_date_time FROM withdraw_view, users WHERE users.id = withdraw_view.balance_providerAND NOT (withdraw_log.amount = 0)";
             stmt.executeUpdate(query2);
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -380,13 +381,42 @@ public class InternalBankAccounts extends DataBaseAccess {
         dropWithdrawViewUsers();
     }
 
+////////////////////////////////////////////////////////    
+////////////////////////////////////////////////////////
+    /**
+     * read data from today's transactions, call class DepositLog
+     */
+//    public static ArrayList<DepositLog> getAllDepositLog() throws ClassNotFoundException, SQLException {
+//        stmt = con.createStatement();
+//        String sql = "select * from deposits_view_users";
+//        rs = stmt.executeQuery(sql);
+//        ArrayList<DepositLog> dataList = new ArrayList<>();
+//        while (rs.next()) {
+//            DepositLog myDepositLog = new DepositLog(rs.getString("balance_provider"), rs.getDouble("amount"), rs.getString("balance_receiver"), rs.getDate("transaction_date_time"));
+//            dataList.add(myDepositLog);
+//        }
+//        return dataList;
+//    }
+//
+//    public String dataListToString(ArrayList<DepositLog> list) {
+//        String result = "+";
+//        try {
+//            for (int i = 0; i < getAllDepositLog().size(); i++) {
+//                result += " " + getAllDepositLog().get(i);
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            Logger.getLogger(InternalBankAccounts.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (SQLException ex) {
+//            Logger.getLogger(InternalBankAccounts.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        return result;
+//    }
     ////////////////////////////////////////////////////////    
-    ////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////   
     // get PassiveUserAmount
     private double tempCheckPassiveUserAmount() {
         try {
-            String sql = "SELECT afdemp_java_1.users.id, afdemp_java_1.accounts.amount FROM afdemp_java_1.users,afdemp_java_1.accounts  WHERE afdemp_java_1.users.id = afdemp_java_1.accounts.user_id AND afdemp_java_1.users.id = '"
-                    + getSelectUserID() + "'";
+            String sql = "SELECT afdemp_java_1.users.id, afdemp_java_1.accounts.amount FROM afdemp_java_1.users,afdemp_java_1.accounts  WHERE afdemp_java_1.users.id = afdemp_java_1.accounts.user_id AND afdemp_java_1.users.id = '" + getSelectUserID() + "'";
             rs = stmt.executeQuery(sql);
             if (rs.next()) {
                 passiveUserAmount = rs.getDouble(2);
@@ -428,14 +458,12 @@ public class InternalBankAccounts extends DataBaseAccess {
     //Update PassiveUserAmount for deposit
     private void updatePassiveAccount() {
         try {
-            String sql = "SELECT afdemp_java_1.users.id, afdemp_java_1.accounts.amount FROM afdemp_java_1.users,afdemp_java_1.accounts  WHERE afdemp_java_1.users.id = afdemp_java_1.accounts.user_id AND afdemp_java_1.users.id = '"
-                    + getSelectUserID() + "'";
+            String sql = "SELECT afdemp_java_1.users.id, afdemp_java_1.accounts.amount FROM afdemp_java_1.users,afdemp_java_1.accounts  WHERE afdemp_java_1.users.id = afdemp_java_1.accounts.user_id AND afdemp_java_1.users.id = '" + getSelectUserID() + "'";
             rs = stmt.executeQuery(sql);
             if (rs.next()) {
                 passiveUserAmount = rs.getDouble(2);
                 double newPassiveUserAmount = passiveUserAmount + getTransactionAmount();
-                String sql4 = "UPDATE afdemp_java_1.accounts SET afdemp_java_1.accounts.amount = '"
-                        + newPassiveUserAmount + "' WHERE afdemp_java_1.accounts.user_id = '" + getSelectUserID() + "'";
+                String sql4 = "UPDATE afdemp_java_1.accounts SET afdemp_java_1.accounts.amount = '" + newPassiveUserAmount + "' WHERE afdemp_java_1.accounts.user_id = '" + getSelectUserID() + "'";
                 pstmt = con.prepareStatement(sql4);
                 pstmt.executeUpdate();
                 System.out.println("\n\n*-----------------------------------------*");
@@ -467,8 +495,7 @@ public class InternalBankAccounts extends DataBaseAccess {
             if (rs.next()) {
                 passiveUserAmount = rs.getDouble(2);
                 double newPassiveUserAmount = passiveUserAmount + getTransactionAmount();
-                String sql4 = "UPDATE afdemp_java_1.accounts SET afdemp_java_1.accounts.amount = '"
-                        + newPassiveUserAmount + "' WHERE afdemp_java_1.accounts.user_id = 1 ";
+                String sql4 = "UPDATE afdemp_java_1.accounts SET afdemp_java_1.accounts.amount = '" + newPassiveUserAmount + "' WHERE afdemp_java_1.accounts.user_id = 1 ";
                 pstmt = con.prepareStatement(sql4);
                 pstmt.executeUpdate();
                 System.out.println("\n\n*-----------------------------------------*");
@@ -491,14 +518,12 @@ public class InternalBankAccounts extends DataBaseAccess {
     //Update PassiveUserAmount for withdaw
     private void updatePassiveAccountWithdaw() {
         try {
-            String sql = "SELECT afdemp_java_1.users.id, afdemp_java_1.accounts.amount FROM afdemp_java_1.users,afdemp_java_1.accounts  WHERE afdemp_java_1.users.id = afdemp_java_1.accounts.user_id AND afdemp_java_1.users.id = '"
-                    + getSelectUserID() + "'";
+            String sql = "SELECT afdemp_java_1.users.id, afdemp_java_1.accounts.amount FROM afdemp_java_1.users,afdemp_java_1.accounts  WHERE afdemp_java_1.users.id = afdemp_java_1.accounts.user_id AND afdemp_java_1.users.id = '" + getSelectUserID() + "'";
             rs = stmt.executeQuery(sql);
             if (rs.next()) {
                 passiveUserAmount = rs.getDouble(2);
                 double newPassiveUserAmount = passiveUserAmount - getTransactionAmount();
-                String sql4 = "UPDATE afdemp_java_1.accounts SET afdemp_java_1.accounts.amount = '"
-                        + newPassiveUserAmount + "' WHERE afdemp_java_1.accounts.user_id = '" + getSelectUserID() + "'";
+                String sql4 = "UPDATE afdemp_java_1.accounts SET afdemp_java_1.accounts.amount = '" + newPassiveUserAmount + "' WHERE afdemp_java_1.accounts.user_id = '" + getSelectUserID() + "'";
                 pstmt = con.prepareStatement(sql4);
                 pstmt.executeUpdate();
                 System.out.println("\n\n*-----------------------------------------*");
@@ -565,3 +590,4 @@ public class InternalBankAccounts extends DataBaseAccess {
     }
 
 }//end InternalBankAccounts
+
