@@ -33,7 +33,7 @@ public class ApplicationMenus {
             case "1":
                 clearConsole();
                 myAdminAccount.getAccessAdminAccount();
-                adminLog.getCreateLogFileActiveUser();
+                //adminLog.getCreateLogFileActiveUser();
                 break;
             case "2":
                 clearConsole();
@@ -51,6 +51,7 @@ public class ApplicationMenus {
                         myAdminAccount.getUpdateActiveAccount();
                         clearConsole();
                         myAdminAccount.getUpdatePassiveAccount();
+                        myAdminAccount.getInsertDepositLog();
                     } else {
                         clearConsole();
                         System.out.println("\n\n*-------------------------------------------------------*");
@@ -78,6 +79,7 @@ public class ApplicationMenus {
                         myAdminAccount.getUpdateActiveAccount();
                         clearConsole();
                         myAdminAccount.getUpdatePassiveAccountWithdaw();
+                        myAdminAccount.getInsertWithdrawtLog();
                     } else {
                         clearConsole();
                         System.out.println("\n\n*-------------------------------------------------------*");
@@ -97,6 +99,8 @@ public class ApplicationMenus {
                 clearConsole();
                 adminLog.getCreateLogDirActiveUser();
                 adminLog.getCreateLogFileActiveUser();
+                myAdminAccount.getInsertDepositLog();
+                myAdminAccount.getInsertWithdrawtLog();
                 System.out.println("\n\n*---------------------------------------*");
                 System.out.println("|  NEW MESSAGE: Statements Updated!     |");
                 System.out.println("*---------------------------------------*\n\n");
@@ -158,12 +162,12 @@ public class ApplicationMenus {
                     myUserAccount.getUpdateActiveAccount();
                     clearConsole();
                     myUserAccount.getUpdatePassiveAdminAccount();
+                    myUserAccount.getInsertDepositLog();
                 } else {
                     clearConsole();
                     System.out.println("\n\n*-------------------------------------------------------*");
                     System.out.println("|  NEW MESSAGE: Insaficient amount! Please retry...     |");
                     System.out.println("*-------------------------------------------------------*\n\n");
-
                 }
                 break;
             case "3":
@@ -186,6 +190,7 @@ public class ApplicationMenus {
                         myUserAccount.getUpdateActiveAccount();
                         clearConsole();
                         myUserAccount.getUpdatePassiveAccount();
+                        myUserAccount.getInsertDepositLog();
                     } else {
                         clearConsole();
                         System.out.println("\n\n*-------------------------------------------------------*");
@@ -201,7 +206,8 @@ public class ApplicationMenus {
                 }
                 break;
             case "4":
-                clearConsole();
+                myUserAccount.getInsertDepositLog();
+                myUserAccount.getInsertWithdrawtLog();
                 System.out.println("choise4");
                 break;
             case "5":

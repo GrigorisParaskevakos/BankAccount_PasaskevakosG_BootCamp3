@@ -15,6 +15,10 @@ import java.util.Date;
 
 public class FileAcces extends InternalBankAccounts {
 
+    public FileAcces() {
+        super();
+    }
+
     /**
      * Date & Time formats
      */
@@ -68,7 +72,7 @@ public class FileAcces extends InternalBankAccounts {
     }
 
     /**
-     * Create files
+     * Create files for deposits Logs
      */
     private void createLogFileActiveUser() {
         transactionDateStamp();
@@ -85,8 +89,6 @@ public class FileAcces extends InternalBankAccounts {
             writer.println("Current Balance: " + getActiveUserAmount() + " €");
             writer.println(
                     "Deposit to user with ID: " + getSelectUserID() + " amount of " + getTransactionAmount() + " €");
-            writer.println(
-                    "Withdraw from user with ID: " + getSelectUserID() + " amount of " + getTransactionAmount() + " €");
             writer.println("Transaction Date Time: " + transactionDateTimeStampFile());
             writer.close();
         } catch (UnsupportedEncodingException ex) {
@@ -99,5 +101,38 @@ public class FileAcces extends InternalBankAccounts {
 
     void getCreateLogFileActiveUser() {
         createLogFileActiveUser();
+    }
+
+    /////////////////////////////////////////////////////
+    /**
+     * Create files for Withdraw Logs
+     */
+    private void createLogFileWithdraw() {
+        transactionDateStamp();
+        transactionDateTimeStamp();
+        transactionDateTimeStampFile();
+        String path = "C:\\Today's_Statements\\";
+        String path2 = "Statement_" + getActiveUser() + "_" + transactionDateStamp() + "\\";
+        PrintWriter writer;
+        String fileName = getActiveUser() + transactionDateTimeStamp() + ".txt";
+        try {
+            writer = new PrintWriter(path + path2 + fileName, "UTF-8");
+            writer.println("User-ID: " + getActiveUserID());
+            writer.println("User Name: " + getActiveUser());
+            writer.println("Current Balance: " + getActiveUserAmount() + " €");
+            writer.println(
+                    "Withdraw from user with ID: " + getSelectUserID() + " amount of " + getTransactionAmount() + " €");
+            writer.println("Transaction Date Time: " + transactionDateTimeStampFile());
+            writer.close();
+        } catch (UnsupportedEncodingException ex) {
+            ex.printStackTrace();
+        } catch (FileNotFoundException ex) {
+            //System.out.println("Ooop File not found!");
+            ex.printStackTrace();
+        }
+    }
+
+    void getCreateLogFileWithdraw() {
+        createLogFileWithdraw();
     }
 }

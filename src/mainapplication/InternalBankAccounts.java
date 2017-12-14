@@ -11,8 +11,6 @@ import static mainapplication.DataBaseAccess.rs;
 
 public class InternalBankAccounts extends DataBaseAccess {
 
-    //transaction user
-    //private String passiveUser;
     private int passiveUserID;
     private double passiveUserAmount;
     static double tempAmount;
@@ -173,6 +171,7 @@ public class InternalBankAccounts extends DataBaseAccess {
             pstmt.setDouble(1, newActiveUserAmmount);
             pstmt.setInt(2, getActiveUserID());
             pstmt.executeUpdate();
+            pstmt.close();
             //System.out.println("NEW active amount = " + newActiveUserAmmount);
             //System.out.println("active ID = " + getActiveUserID());
         } catch (SQLException ex) {
@@ -187,6 +186,58 @@ public class InternalBankAccounts extends DataBaseAccess {
     void getUpdateActiveAccount() {
         updateActiveAccount();
     }
+    //////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////
+
+    //log ActiveUserAmount
+    private void insertDepositLog() {
+        try {
+            FileAcces logDeposit = new FileAcces();
+            String query = "INSERT INTO afdemp_java_1.deposit_log (afdemp_java_1.deposit_log.active_user_id, afdemp_java_1.deposit_log.passive_user_id, afdemp_java_1.deposit_log.amount) VALUES(?, ?, ?)";
+            pstmt = con.prepareStatement(query);
+            pstmt.setInt(1, getActiveUserID());
+            if (getSelectUserID() == 0) {
+                passiveUserID = 1;
+            }
+            pstmt.setInt(2, getSelectUserID());
+            pstmt.setDouble(3, getTransactionAmount());
+            pstmt.execute();
+            //BufferReader myReader =new BufferReader();
+            logDeposit.getCreateLogFileActiveUser();
+            pstmt.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            System.out.println("log..out");
+        }
+    }
+
+    void getInsertDepositLog() {
+        insertDepositLog();
+    }
+
+    //log ActiveUserAmount
+    private void insertWithdrawtLog() {
+        try {
+            FileAcces logDeposit = new FileAcces();
+            String query = "INSERT INTO afdemp_java_1.withdraw_log (afdemp_java_1.withdraw_log.active_user_id, afdemp_java_1.withdraw_log.passive_user_id, afdemp_java_1.withdraw_log.amount) VALUES(?, ?, ?)";
+            pstmt = con.prepareStatement(query);
+            pstmt.setInt(1, getActiveUserID());
+            pstmt.setInt(2, getSelectUserID());
+            pstmt.setDouble(3, getTransactionAmount());
+            pstmt.execute();
+            logDeposit.getCreateLogFileActiveUser();
+            pstmt.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            System.out.println("log..out");
+        }
+    }
+
+    void getInsertWithdrawtLog() {
+        insertWithdrawtLog();
+    }
+    //////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////
 
     // get PassiveUserAmount
     private double tempCheckPassiveUserAmount() {
@@ -360,14 +411,14 @@ public class InternalBankAccounts extends DataBaseAccess {
     void selectUserID() {
         try {
             Scanner input = new Scanner(System.in);
-            this.passiveUserID = (int) input.nextInt();
+            this.passiveUserID = input.nextInt();
         } catch (InputMismatchException e) {
             getSelectUserID();
         }
     }
 
     int getSelectUserID() {
-        return passiveUserID;
+        return this.passiveUserID;
     }
 
 }//end InternalBankAccounts
