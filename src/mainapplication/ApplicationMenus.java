@@ -221,6 +221,9 @@ public class ApplicationMenus {
                 myUserAccount.getDepositsViewUsers();
                 myUserAccount.getWithdrawView();
                 myUserAccount.getWithdrawViewUsers();
+                System.out.println("\n\n*---------------------------------------*");
+                System.out.println("|  NEW MESSAGE: Statements Updated!     |");
+                System.out.println("*---------------------------------------*\n\n");
                 break;
             case "5":
                 DelayThread myTimeThread = new DelayThread();
