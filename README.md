@@ -14,7 +14,7 @@
 --SETUP (STEP2)
 --CLOSE WORKBENCH
 THEN:
----Just open "BankAccounts.bat" and make history!
+---Just open "BankAccounts.bat" and make Run the Application "
 
 # E L S E do:
 
