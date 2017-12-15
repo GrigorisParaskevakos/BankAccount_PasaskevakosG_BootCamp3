@@ -10,6 +10,7 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -86,9 +87,10 @@ public class FileAcces extends InternalBankAccounts {
             writer = new PrintWriter(path + path2 + fileName, "UTF-8");
             writer.println("User-ID: " + getActiveUserID());
             writer.println("User Name: " + getActiveUser());
-            writer.println("Current Balance: " + getActiveUserAmount() + " \u20ac");
-            double t = getPassiveUserAmmount();
-            writer.println("Passive user amount: " + t + " \u20ac");
+            double d = getActiveUserAmount();
+            String s = formatAmount(d);
+            writer.println("Current Balance: " + s + " \u20ac");
+            writer.println("Action: Deposit");
             writer.println("Transaction Date Time: " + transactionDateTimeStampFile());
             writer.close();
         } catch (UnsupportedEncodingException ex) {
@@ -119,8 +121,10 @@ public class FileAcces extends InternalBankAccounts {
             writer = new PrintWriter(path + path2 + fileName, "UTF-8");
             writer.println("User-ID: " + getActiveUserID());
             writer.println("User Name: " + getActiveUser());
-            writer.println("Current Balance: " + getActiveUserAmount() + " \u20ac");
-            writer.println("Withdraw from user with ID: " + super.getSelectUserID() + " amount of " + super.getTransactionAmount() + " €");
+            double d2 = getActiveUserAmount();
+            String s2 = formatAmount(d2);
+            writer.println("Current Balance: " + s2 + " \u20ac");
+            writer.println("Action: Withdraw");
             writer.println("Transaction Date Time: " + transactionDateTimeStampFile());
             writer.close();
         } catch (UnsupportedEncodingException ex) {

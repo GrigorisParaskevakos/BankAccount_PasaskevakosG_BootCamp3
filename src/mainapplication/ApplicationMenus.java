@@ -142,6 +142,7 @@ public class ApplicationMenus {
         LoginScreen myLogin = new LoginScreen();
         InternalBankAccounts myUserAccount = new InternalBankAccounts();
         FileAcces userLog = new FileAcces();
+        userLog.getCreateLogDirActiveUser();
         System.out.println("1. View account");
         System.out.println("2. Deposit to Cooperative's (super admin) bank accounts");
         System.out.println("3. Deposit to a Member's bank accounts");
