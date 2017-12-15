@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        html {
+            font-size: 24px;
+            background-color: wheat;
+            color: rgb(59, 59, 59);
+        }
+        
+        body {
+            display: inline;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            font-size: 38px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Οδηγίες Εγκατάστασης ΜySQL Workbench</h1>
+    <ol>
+        <li>Κατεβάστε τον installer της αρεσκείας σας (πατήστε <a href="https://dev.mysql.com/downloads/workbench/ " target=" _blank ">εδώ</a> ή για το πλήρες msi σε Windows<a href="https://dev.mysql.com/downloads/windows/installer/5.7.html" target=" _blank ">εδώ</a>).
+        </li>
+        <li>Για Windows: Πριν ξεκινήσετε τον installer βεβαιωθείτε ότι έχετε ήδη τα <a href="https://www.microsoft.com/en-us/download/details.aspx?id=30653" target=" _blank ">Microsoft .NET Framework 4.5</a> και <a href="https://www.microsoft.com/en-us/download/details.aspx?id=48145"
+                target=" _blank ">Visual C++ Redistributable for Visual Studio 2015</a>(εγκαταστήστε και 32-bit και 64-bit). Για άλλα OS δείτε στη σελίδα τα dependencies. </li>
+        <li>Για Windows: Ξεκινήσετε τον Installer, πατήστε next σε όλα (μπορείτε να διαλέξετε το developer’s default). Αν κάτι έγινε fail στην εγκατάσταση πιθανότατα δεν έχει εγκαταστήσει αυτά του βήματος 2 (expansions για Excel, Visual Basic, Python κλπ
+            μπορείτε να τα αγνοήσετε αν δεν τα χρησιμοποιείτε). </li>
+        <li>Για Windows: Στην εγκατάσταση του Server πατήστε σε όλα next. Θα χρειαστεί να ορίσετε ένα κωδικό για το root account (αν θέλετε μπορείτε να διαλέξετε να μην ξεκινά ο Server στο System Startup, αλλά να τον ανοίγετε εσείς όποτε θέλετε με τον MySQL
+            Notifier).
+        </li>
+        <li>Ανοίξτε το MySQL Workbench και κάντε κλικ στο Local instance MySQL Router (θα ζητηθεί ο κωδικός που ορίσατε στο βήμα 4).</li>
+        <li>Βάλτε μία μεγάλη τιμή (π.χ. 3000) στο πεδίο που θα βρείτε στο Edit → Preferences → SQL Editor → DBMS connection read time out (in seconds). Στο ίδιο παράθυρο απενεργοποιήστε και το Safe Updates (rejects UPDATEs and DELETEs with no restrictions).</li>
+    </ol>
+</body>
+
+</html>
