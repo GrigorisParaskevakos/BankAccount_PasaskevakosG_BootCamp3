@@ -19,7 +19,7 @@ public class ApplicationMenus {
         InternalBankAccounts myAdminAccount = new InternalBankAccounts();
         FileAcces adminLog = new FileAcces();
         adminLog.getCreateLogDirActiveUser();
-        System.out.printf("1. View Cooperative's (super admin) internal bank account\n");
+        System.out.printf("\n1. View Cooperative's (super admin) internal bank account\n");
         System.out.println("2. View Member's bank accounts");
         System.out.println("3. Deposit to Member's bank accounts");
         System.out.println("4. Withdraw from Member's bank accounts");
@@ -143,7 +143,7 @@ public class ApplicationMenus {
         InternalBankAccounts myUserAccount = new InternalBankAccounts();
         FileAcces userLog = new FileAcces();
         userLog.getCreateLogDirActiveUser();
-        System.out.println("1. View account");
+        System.out.printf("\n1. View account\n");
         System.out.println("2. Deposit to Cooperative's (super admin) bank accounts");
         System.out.println("3. Deposit to a Member's bank accounts");
         System.out.println("4. Send to log file today's transactions");

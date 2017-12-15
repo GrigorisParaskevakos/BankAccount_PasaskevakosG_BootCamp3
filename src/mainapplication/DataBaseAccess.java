@@ -47,6 +47,7 @@ public class DataBaseAccess {
             ApplicationMenus clearThis = new ApplicationMenus();
             clearThis.clearConsole();
             System.out.println("JDBC installed");
+            System.out.println("Connecting...");
         } catch (ClassNotFoundException ex) {
             System.out.println("JDBC went wrong");
         }
