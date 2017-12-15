@@ -1,4 +1,16 @@
+#Bootcamp Project1
+
+# Author @Paraskevakos Grigoris
+
 #Setup for OS Windows
+#All files are inside BankAccount_Pasaskevakos_Grigors_BootCamp3
+
+#Requirements :
+
+# Java JRE (Currect jre1.8.0_131)
+
+# Windows OS
+
 ######################################################################################################
 
 # I F YOU HAVE MySQL installed do:
