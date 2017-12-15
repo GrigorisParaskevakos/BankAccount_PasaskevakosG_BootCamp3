@@ -30,103 +30,105 @@ public class ApplicationMenus {
         do {
             choise = myLogin.getchoice();
             switch (choise) {
-                case "1":
-                    clearConsole();
-                    myAdminAccount.getAccessAdminAccount();
-                    break;
-                case "2":
-                    clearConsole();
-                    myAdminAccount.getAccessAdminMembersAccount();
-                    break;
-                case "3":
-                    clearConsole();
-                    myAdminAccount.getAccessAdminMembersAccount();
-                    System.out.println("Please select a user ID to deposit: ");
-                    myAdminAccount.selectUserID();
-                    if ((myAdminAccount.getSelectUserID() > 1) && (myAdminAccount.getSelectUserID() <= 3)) {
-                        System.out.print("Please select a positive amount to deposit: ");
-                        if (myAdminAccount.getDepositMemberAccount() == true) {
-                            myAdminAccount.getCheckedDepositMemberAccount();
-                            myAdminAccount.getUpdateActiveAccount();
-                            clearConsole();
-                            myAdminAccount.getUpdatePassiveAccount();
-                            myAdminAccount.getInsertDepositLog();
-                            adminLog.getCreateLogFileDeposits();
-                        } else {
-                            clearConsole();
-                            System.out.println("\n\n*-------------------------------------------------------*");
-                            System.out.println("|  NEW MESSAGE: Insaficient amount! Please retry...     |");
-                            System.out.println("*-------------------------------------------------------*\n\n");
-                        }
+            case "1":
+                clearConsole();
+                myAdminAccount.getAccessAdminAccount();
+                break;
+            case "2":
+                clearConsole();
+                myAdminAccount.getAccessAdminMembersAccount();
+                break;
+            case "3":
+                clearConsole();
+                myAdminAccount.getAccessAdminMembersAccount();
+                System.out.println("Please select a user ID to deposit: ");
+                myAdminAccount.selectUserID();
+                if ((myAdminAccount.getSelectUserID() > 1) && (myAdminAccount.getSelectUserID() <= 3)) {
+                    System.out.print("Please select a positive amount to deposit: ");
+                    if (myAdminAccount.getDepositMemberAccount() == true) {
+                        myAdminAccount.getCheckedDepositMemberAccount();
+                        myAdminAccount.getUpdateActiveAccount();
+                        clearConsole();
+                        myAdminAccount.getUpdatePassiveAccount();
+                        myAdminAccount.getInsertDepositLog();
+                        adminLog.getCreateLogFileDeposits();
                     } else {
                         clearConsole();
-                        System.out.println("\n\n*---------------------------------------------*");
-                        System.out.println("|  NEW MESSAGE: WRONG ID! Please retry...     |");
-                        System.out.println("*---------------------------------------------*\n\n");
-
+                        System.out.println("\n\n*-------------------------------------------------------*");
+                        System.out.println("|  NEW MESSAGE: Insaficient amount! Please retry...     |");
+                        System.out.println("*-------------------------------------------------------*\n\n");
                     }
-                    break;
-                case "4":
+                } else {
                     clearConsole();
-                    myAdminAccount.getAccessAdminMembersAccount();
-                    System.out.println("Please select a user ID to withdraw: ");
-                    myAdminAccount.selectUserID();
-                    if ((myAdminAccount.getSelectUserID() > 1) && (myAdminAccount.getSelectUserID() <= 3)) {
-                        System.out.println("Please select a positive amount to withdraw: ");
-                        if (myAdminAccount.getWithdrawMemberAccount() == true) {
-                            myAdminAccount.getCheckedWithdrawMemberAccount();
-                            myAdminAccount.getUpdateActiveAccount();
-                            clearConsole();
-                            myAdminAccount.getUpdatePassiveAccountWithdaw();
-                            myAdminAccount.getInsertWithdrawtLog();
-                        } else {
-                            clearConsole();
-                            System.out.println("\n\n*-------------------------------------------------------*");
-                            System.out.println("|  NEW MESSAGE: Insaficient amount! Please retry...     |");
-                            System.out.println("*-------------------------------------------------------*\n\n");
-                        }
+                    System.out.println("\n\n*---------------------------------------------*");
+                    System.out.println("|  NEW MESSAGE: WRONG ID! Please retry...     |");
+                    System.out.println("*---------------------------------------------*\n\n");
+
+                }
+                break;
+            case "4":
+                clearConsole();
+                myAdminAccount.getAccessAdminMembersAccount();
+                System.out.println("Please select a user ID to withdraw: ");
+                myAdminAccount.selectUserID();
+                if ((myAdminAccount.getSelectUserID() > 1) && (myAdminAccount.getSelectUserID() <= 3)) {
+                    System.out.println("Please select a positive amount to withdraw: ");
+                    if (myAdminAccount.getWithdrawMemberAccount() == true) {
+                        myAdminAccount.getCheckedWithdrawMemberAccount();
+                        myAdminAccount.getUpdateActiveAccount();
+                        clearConsole();
+                        myAdminAccount.getUpdatePassiveAccountWithdaw();
+                        myAdminAccount.getInsertWithdrawtLog();
+                        adminLog.getCreateLogFileWithdraw();
                     } else {
                         clearConsole();
-                        System.out.println("\n\n*---------------------------------------------*");
-                        System.out.println("|  NEW MESSAGE: WRONG ID! Please retry...     |");
-                        System.out.println("*---------------------------------------------*\n\n");
-
+                        System.out.println("\n\n*-------------------------------------------------------*");
+                        System.out.println("|  NEW MESSAGE: Insaficient amount! Please retry...     |");
+                        System.out.println("*-------------------------------------------------------*\n\n");
                     }
-                    break;
+                } else {
+                    clearConsole();
+                    System.out.println("\n\n*---------------------------------------------*");
+                    System.out.println("|  NEW MESSAGE: WRONG ID! Please retry...     |");
+                    System.out.println("*---------------------------------------------*\n\n");
 
-                case "5":
-                    clearConsole();
-                    myAdminAccount.getInsertDepositLog();
-                    myAdminAccount.getInsertWithdrawtLog();
-                    myAdminAccount.getAccessDepositViewUsers();
-                    System.out.println("\n\n*---------------------------------------*");
-                    System.out.println("|  NEW MESSAGE: Statements Updated!     |");
-                    System.out.println("*---------------------------------------*\n\n");
-                    break;
-                case "6":
-                    DelayThread myTimeThread = new DelayThread();
-                    System.out.printf("\nPrivate Banking System is shutting down");
-                    //myAdminAccount.getDropDepositsView();
-                    //myAdminAccount.getDropDepositsViewUsers();
-                    //myAdminAccount.getDropWithdrawView();
-                    //myAdminAccount.getDropWithdrawViewUsers();
-                    for (int count = 5; count > 0; count--) {
-                        System.out.printf(".");
-                        myTimeThread.delay(1000);
-                    }
-                    System.out.printf("\n");
-                    myLogin.getScannerClose();
-                    myDB.getdbDisConnect();
-                    System.exit(0);
-                    break;
-                default:
-                    clearConsole();
-                    System.out.println("\n\n*-------------------------------------------------*");
-                    System.out.println("|  NEW MESSAGE: WRONG CHOICE! Please retry...     |");
-                    System.out.println("*-------------------------------------------------*\n\n");
-                    adminMenu();
+                }
+                break;
+
+            case "5":
+                clearConsole();
+                myAdminAccount.getInsertDepositLog();
+                myAdminAccount.getInsertWithdrawtLog();
+                myAdminAccount.getAccessDepositViewUsers();
+                System.out.println("\n\n*---------------------------------------*");
+                System.out.println("|  NEW MESSAGE: Statements Updated!     |");
+                System.out.println("*---------------------------------------*\n\n");
+                break;
+            case "6":
+                DelayThread myTimeThread = new DelayThread();
+                System.out.printf("\nPrivate Banking System is shutting down");
+                //myAdminAccount.getDropDepositsView();
+                //myAdminAccount.getDropDepositsViewUsers();
+                //myAdminAccount.getDropWithdrawView();
+                //myAdminAccount.getDropWithdrawViewUsers();
+                for (int count = 5; count > 0; count--) {
+                    System.out.printf(".");
+                    myTimeThread.delay(1000);
+                }
+                System.out.printf("\n");
+                myLogin.getScannerClose();
+                myDB.getdbDisConnect();
+                System.exit(0);
+                break;
+            default:
+                clearConsole();
+                System.out.println("\n\n*-------------------------------------------------*");
+                System.out.println("|  NEW MESSAGE: WRONG CHOICE! Please retry...     |");
+                System.out.println("*-------------------------------------------------*\n\n");
+                adminMenu();
             }
-        } while (!choise.equals("1") && !choise.equals("2") && !choise.equals("3") && !choise.equals("4") && !choise.equals("5") && !choise.equals("6"));
+        } while (!choise.equals("1") && !choise.equals("2") && !choise.equals("3") && !choise.equals("4")
+                && !choise.equals("5") && !choise.equals("6"));
         adminMenu();
     }//end AdminMenu
 
@@ -135,7 +137,7 @@ public class ApplicationMenus {
     }
 
     /**
-     * Display simple user menu 
+     * Display simple user menu
      */
     private static void SimpleUserMenu() {
         DataBaseAccess myDB = new DataBaseAccess();
@@ -153,19 +155,48 @@ public class ApplicationMenus {
         do {
             choise = myLogin.getchoice();
             switch (choise) {
-                case "1":
-                    clearConsole();
-                    myUserAccount.getAccessUserMembersAccount();
+            case "1":
+                clearConsole();
+                myUserAccount.getAccessUserMembersAccount();
 
-                    break;
-                case "2":
+                break;
+            case "2":
+                clearConsole();
+                System.out.println("Please select a positive amount to deposit: ");
+                if (myUserAccount.getDepositMemberAccount() == true) {
+                    myUserAccount.getCheckedDepositMemberAccount();
+                    myUserAccount.getUpdateActiveAccount();
                     clearConsole();
+                    myUserAccount.getUpdatePassiveAdminAccount();
+                    myUserAccount.getInsertDepositLog();
+                    userLog.getCreateLogFileDeposits();
+                } else {
+                    clearConsole();
+                    System.out.println("\n\n*-------------------------------------------------------*");
+                    System.out.println("|  NEW MESSAGE: Insaficient amount! Please retry...     |");
+                    System.out.println("*-------------------------------------------------------*\n\n");
+                }
+                break;
+            case "3":
+                clearConsole();
+                myUserAccount.getAccessSimpleMembersInfo();
+                System.out.println("Please select a user ID to deposit: ");
+                myUserAccount.selectUserID();
+                if (myUserAccount.getSelectUserID() == myDB.getActiveUserID()) {
+                    clearConsole();
+                    System.out.println(
+                            "\n\n*-----------------------------------------------------------------------------------------*");
+                    System.out.println(
+                            "|  NEW MESSAGE: Try not to deposit to your account from your account! Please retry...     |");
+                    System.out.println(
+                            "*-----------------------------------------------------------------------------------------*\n\n");
+                } else if ((myUserAccount.getSelectUserID() >= 1) && (myUserAccount.getSelectUserID() <= 3)) {
                     System.out.println("Please select a positive amount to deposit: ");
                     if (myUserAccount.getDepositMemberAccount() == true) {
                         myUserAccount.getCheckedDepositMemberAccount();
                         myUserAccount.getUpdateActiveAccount();
                         clearConsole();
-                        myUserAccount.getUpdatePassiveAdminAccount();
+                        myUserAccount.getUpdatePassiveAccount();
                         myUserAccount.getInsertDepositLog();
                         userLog.getCreateLogFileDeposits();
                     } else {
@@ -174,70 +205,45 @@ public class ApplicationMenus {
                         System.out.println("|  NEW MESSAGE: Insaficient amount! Please retry...     |");
                         System.out.println("*-------------------------------------------------------*\n\n");
                     }
-                    break;
-                case "3":
+                } else {
                     clearConsole();
-                    myUserAccount.getAccessSimpleMembersInfo();
-                    System.out.println("Please select a user ID to deposit: ");
-                    myUserAccount.selectUserID();
-                    if (myUserAccount.getSelectUserID() == myDB.getActiveUserID()) {
-                        clearConsole();
-                        System.out.println("\n\n*-----------------------------------------------------------------------------------------*");
-                        System.out.println("|  NEW MESSAGE: Try not to deposit to your account from your account! Please retry...     |");
-                        System.out.println("*-----------------------------------------------------------------------------------------*\n\n");
-                    } else if ((myUserAccount.getSelectUserID() >= 1) && (myUserAccount.getSelectUserID() <= 3)) {
-                        System.out.println("Please select a positive amount to deposit: ");
-                        if (myUserAccount.getDepositMemberAccount() == true) {
-                            myUserAccount.getCheckedDepositMemberAccount();
-                            myUserAccount.getUpdateActiveAccount();
-                            clearConsole();
-                            myUserAccount.getUpdatePassiveAccount();
-                            myUserAccount.getInsertDepositLog();
-                            userLog.getCreateLogFileDeposits();
-                        } else {
-                            clearConsole();
-                            System.out.println("\n\n*-------------------------------------------------------*");
-                            System.out.println("|  NEW MESSAGE: Insaficient amount! Please retry...     |");
-                            System.out.println("*-------------------------------------------------------*\n\n");
-                        }
-                    } else {
-                        clearConsole();
-                        System.out.println("\n\n*---------------------------------------------*");
-                        System.out.println("|  NEW MESSAGE: WRONG ID! Please retry...     |");
-                        System.out.println("*---------------------------------------------*\n\n");
+                    System.out.println("\n\n*---------------------------------------------*");
+                    System.out.println("|  NEW MESSAGE: WRONG ID! Please retry...     |");
+                    System.out.println("*---------------------------------------------*\n\n");
 
-                    }
-                    break;
-                case "4":
-                    myUserAccount.getInsertDepositLog();
-                    System.out.println("\n\n*---------------------------------------*");
-                    System.out.println("|  NEW MESSAGE: Statements Updated!     |");
-                    System.out.println("*---------------------------------------*\n\n");
-                    break;
-                case "5":
-                    DelayThread myTimeThread = new DelayThread();
-                    System.out.printf("\nPrivate Banking System is shutting down");
-                    myUserAccount.getDropDepositsView();
-                    myUserAccount.getDropDepositsViewUsers();
-                    myUserAccount.getDropWithdrawView();
-                    myUserAccount.getDropWithdrawViewUsers();
-                    for (int count = 5; count > 0; count--) {
-                        System.out.printf(".");
-                        myTimeThread.delay(1000);
-                    }
-                    System.out.printf("\n");
-                    myLogin.getScannerClose();
-                    myDB.getdbDisConnect();
-                    System.exit(0);
-                    break;
-                default:
-                    clearConsole();
-                    System.out.println("\n\n*-------------------------------------------------*");
-                    System.out.println("|  NEW MESSAGE: WRONG CHOICE! Please retry...     |");
-                    System.out.println("*-------------------------------------------------*\n\n");
-                    SimpleUserMenu();
+                }
+                break;
+            case "4":
+                myUserAccount.getInsertDepositLog();
+                System.out.println("\n\n*---------------------------------------*");
+                System.out.println("|  NEW MESSAGE: Statements Updated!     |");
+                System.out.println("*---------------------------------------*\n\n");
+                break;
+            case "5":
+                DelayThread myTimeThread = new DelayThread();
+                System.out.printf("\nPrivate Banking System is shutting down");
+                myUserAccount.getDropDepositsView();
+                myUserAccount.getDropDepositsViewUsers();
+                myUserAccount.getDropWithdrawView();
+                myUserAccount.getDropWithdrawViewUsers();
+                for (int count = 5; count > 0; count--) {
+                    System.out.printf(".");
+                    myTimeThread.delay(1000);
+                }
+                System.out.printf("\n");
+                myLogin.getScannerClose();
+                myDB.getdbDisConnect();
+                System.exit(0);
+                break;
+            default:
+                clearConsole();
+                System.out.println("\n\n*-------------------------------------------------*");
+                System.out.println("|  NEW MESSAGE: WRONG CHOICE! Please retry...     |");
+                System.out.println("*-------------------------------------------------*\n\n");
+                SimpleUserMenu();
             }
-        } while (!choise.equals("1") && !choise.equals("2") && !choise.equals("3") && !choise.equals("4") && !choise.equals("5"));
+        } while (!choise.equals("1") && !choise.equals("2") && !choise.equals("3") && !choise.equals("4")
+                && !choise.equals("5"));
         SimpleUserMenu();
     }//end SimpleUserMenu
 
