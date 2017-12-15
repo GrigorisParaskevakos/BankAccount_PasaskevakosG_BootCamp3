@@ -6,7 +6,6 @@
 package mainapplication;
 
 import java.io.IOException;
-import java.util.Scanner;
 
 /**
  *
@@ -19,8 +18,6 @@ public class ApplicationMenus {
         LoginScreen myLogin = new LoginScreen();
         InternalBankAccounts myAdminAccount = new InternalBankAccounts();
         FileAcces adminLog = new FileAcces();
-        myAdminAccount.getDepositsView();
-        myAdminAccount.getDepositsViewUsers();
         adminLog.getCreateLogDirActiveUser();
         adminLog.getCreateLogFileActiveUser();
         System.out.printf("1. View Cooperative's (super admin) internal bank account\n");
@@ -102,6 +99,7 @@ public class ApplicationMenus {
                     clearConsole();
                     myAdminAccount.getInsertDepositLog();
                     myAdminAccount.getInsertWithdrawtLog();
+                    myAdminAccount.getAccessDepositViewUsers();
                     System.out.println("\n\n*---------------------------------------*");
                     System.out.println("|  NEW MESSAGE: Statements Updated!     |");
                     System.out.println("*---------------------------------------*\n\n");
@@ -109,10 +107,10 @@ public class ApplicationMenus {
                 case "6":
                     DelayThread myTimeThread = new DelayThread();
                     System.out.printf("\nPrivate Banking System is shutting down");
-                    myAdminAccount.getDropDepositsView();
-                    myAdminAccount.getDropDepositsViewUsers();
-                    myAdminAccount.getDropWithdrawView();
-                    myAdminAccount.getDropWithdrawViewUsers();
+                    //myAdminAccount.getDropDepositsView();
+                    //myAdminAccount.getDropDepositsViewUsers();
+                    //myAdminAccount.getDropWithdrawView();
+                    //myAdminAccount.getDropWithdrawViewUsers();
                     for (int count = 5; count > 0; count--) {
                         System.out.printf(".");
                         myTimeThread.delay(1000);
@@ -133,8 +131,7 @@ public class ApplicationMenus {
         adminMenu();
     }//end AdminMenu
 
-    void
-            getAdminMenu() {
+    void getAdminMenu() {
         adminMenu();
     }
 
@@ -170,7 +167,6 @@ public class ApplicationMenus {
                         clearConsole();
                         myUserAccount.getUpdatePassiveAdminAccount();
                         myUserAccount.getInsertDepositLog();
-
                     } else {
                         clearConsole();
                         System.out.println("\n\n*-------------------------------------------------------*");
@@ -213,7 +209,6 @@ public class ApplicationMenus {
                     break;
                 case "4":
                     myUserAccount.getInsertDepositLog();
-                    myUserAccount.getInsertWithdrawtLog();
                     System.out.println("\n\n*---------------------------------------*");
                     System.out.println("|  NEW MESSAGE: Statements Updated!     |");
                     System.out.println("*---------------------------------------*\n\n");
@@ -239,7 +234,7 @@ public class ApplicationMenus {
                     System.out.println("\n\n*-------------------------------------------------*");
                     System.out.println("|  NEW MESSAGE: WRONG CHOICE! Please retry...     |");
                     System.out.println("*-------------------------------------------------*\n\n");
-                    System.out.print("Please select a number between 1-5: ");
+                    SimpleUserMenu();
             }
         } while (!choise.equals("1") && !choise.equals("2") && !choise.equals("3") && !choise.equals("4") && !choise.equals("5"));
         SimpleUserMenu();

@@ -1,18 +1,15 @@
 package mainapplication;
 
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.InputMismatchException;
+import java.util.Locale;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import static mainapplication.ApplicationMenus.clearConsole;
 import static mainapplication.DataBaseAccess.rs;
-import java.sql.Date;
 
 public class InternalBankAccounts extends DataBaseAccess {
 
@@ -36,8 +33,10 @@ public class InternalBankAccounts extends DataBaseAccess {
             System.out.printf("%2s |%5s  |%15s  | %21s", "ID", "USER", "AMMOUNT", "Transaction date\n");
             System.out.println("---+-------+-----------------+----------------------------");
             while (rs.next()) {
-
-                System.out.printf("%2d |%5s  |%15f  | %21s%n", this.rs.getInt(1), this.rs.getString(2), this.rs.getDouble(3), this.rs.getString(4));
+                double d = rs.getDouble(3);
+                String s = formatAmount(d);
+                //u20ac stands for €
+                System.out.printf("%2d |%5s  |%15s \u20ac| %21s%n", rs.getInt(1), rs.getString(2), s, rs.getString(4));
                 System.out.println("---+-------+-----------------+----------------------------");
             }
         } catch (SQLException ex) {
@@ -49,6 +48,37 @@ public class InternalBankAccounts extends DataBaseAccess {
         this.accessAdminAccount();
     }
 
+    ///////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////
+    /**
+     * get views results
+     */
+    private void accessDepositViewUsers() {
+        try {
+            String q = "SELECT * FROM afdemp_java_1.deposits_view_users";
+            rs = stmt.executeQuery(q);
+            System.out.println("\nConnected: " + getActiveUser() + "\nView: Deposits view users");
+            System.out.println("----------+-----------------+------------+----------------------------");
+            System.out.printf("%5s  |%15s  |%9s   |%9s%n", "Provider", "AMMOUNT", "Receiver", "Date");
+            System.out.println("----------+-----------------+------------+----------------------------");
+            while (rs.next()) {
+                double d = rs.getDouble(2);
+                String s = formatAmount(d);
+                System.out.printf("%5s     |%15s \u20ac|%9s   |%16s%n", rs.getString(1), s, rs.getString(3), rs.getString(4));
+                System.out.println("----------+-----------------+------------+----------------------------");
+            }
+        } catch (SQLException ex) {
+            System.out.println("View deposit failed");
+            //Logger.getLogger(DataBaseAccess.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    void getAccessDepositViewUsers() {
+        this.accessDepositViewUsers();
+    }
+
+    ///////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////
     /**
      * Super Admin view Simple Users account
      */
@@ -60,8 +90,9 @@ public class InternalBankAccounts extends DataBaseAccess {
             System.out.printf("%2s |%5s  |%15s  | %21s", "ID", "USER", "AMMOUNT", "Transaction date\n");
             System.out.println("---+-------+-----------------+----------------------------");
             while (rs.next()) {
-                //System.out.printf(this.rs.getInt(1) + "   | " + this.rs.getString(2) + "  |" + this.rs.getDouble(3) + "   |" + this.rs.getString(4) + "\n");
-                System.out.printf("%2d |%5s  |%15f  | %21s%n", this.rs.getInt(1), this.rs.getString(2), this.rs.getDouble(3), this.rs.getString(4));
+                double d = rs.getDouble(3);
+                String s = formatAmount(d);
+                System.out.printf("%2d |%5s  |%15s \u20ac| %21s%n", rs.getInt(1), rs.getString(2), s, rs.getString(4));
                 System.out.println("---+-------+-----------------+----------------------------");
             }
         } catch (SQLException ex) {
@@ -80,12 +111,12 @@ public class InternalBankAccounts extends DataBaseAccess {
         try {
             rs = stmt.executeQuery(sql5);
             System.out.println("\nConnected: " + getActiveUser() + "\nView: All users' info");
-            System.out.println("---+-----+");
-            System.out.printf("%2s|%5s", "ID ", "USER\n");
-            System.out.println("---+-----+");
+            System.out.println("+---------+");
+            System.out.printf("|%2s|%5s|%n", "ID ", "USER");
+            System.out.println("+---+-----+");
             while (rs.next()) {
-                System.out.printf("%2d |%5s %n", this.rs.getInt(1), this.rs.getString(2));
-                System.out.println("---+-----+");
+                System.out.printf("|%2d |%5s|%n", rs.getInt(1), rs.getString(2));
+                System.out.println("+---+-----+");
             }
         } catch (SQLException ex) {
             Logger.getLogger(DataBaseAccess.class.getName()).log(Level.SEVERE, null, ex);
@@ -108,8 +139,9 @@ public class InternalBankAccounts extends DataBaseAccess {
             System.out.printf("%2s |%5s  |%15s  | %21s", "ID", "USER", "AMMOUNT", "Transaction date\n");
             System.out.println("---+-------+-----------------+----------------------------");
             while (rs.next()) {
-                //System.out.printf(this.rs.getInt(1) + "   | " + this.rs.getString(2) + "  |" + this.rs.getDouble(3) + "   |" + this.rs.getString(4) + "\n");
-                System.out.printf("%2d |%5s  |%15f  | %21s%n", this.rs.getInt(1), this.rs.getString(2), this.rs.getDouble(3), this.rs.getString(4));
+                double d = rs.getDouble(3);
+                String s = formatAmount(d);
+                System.out.printf("%2d |%5s  |%15s \u20ac| %21s%n", rs.getInt(1), rs.getString(2), s, rs.getString(4));
                 System.out.println("---+-------+-----------------+----------------------------");
             }
         } catch (SQLException ex) {
@@ -128,9 +160,9 @@ public class InternalBankAccounts extends DataBaseAccess {
             this.userInputAmount = input.nextDouble();
         } catch (InputMismatchException e) {
             clearConsole();
-            System.out.println("\n\n*-----------------------------------------------------------*");
-            System.out.println("|  NEW MESSAGE: Amount must be NUMERIC! Please retry...     |");
-            System.out.println("*-----------------------------------------------------------*\n\n");
+            System.out.println("\n\n*--------------------------------------------------------------*");
+            System.out.println("|  NEW MESSAGE:If decimal amount(cents) use ',' Please retry...|");
+            System.out.println("*--------------------------------------------------------------*\n\n");
             System.out.println("Please select a NUMERIC positive amount: ");
             setTransactionAmount();
         }
@@ -419,13 +451,16 @@ public class InternalBankAccounts extends DataBaseAccess {
             String sql = "SELECT afdemp_java_1.users.id, afdemp_java_1.accounts.amount FROM afdemp_java_1.users,afdemp_java_1.accounts  WHERE afdemp_java_1.users.id = afdemp_java_1.accounts.user_id AND afdemp_java_1.users.id = '" + getSelectUserID() + "'";
             rs = stmt.executeQuery(sql);
             if (rs.next()) {
-                passiveUserAmount = rs.getDouble(2);
+                this.passiveUserAmount = rs.getDouble(2);
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-        return passiveUserAmount;
+        return this.passiveUserAmount;
+    }
 
+    double getPassiveUserAmmount() {
+        return this.passiveUserAmount;
     }
 
     double getTempCheckPassiveUserAmount() {
@@ -578,7 +613,7 @@ public class InternalBankAccounts extends DataBaseAccess {
     //Select a user ID to deposit or withdraw
     void selectUserID() {
         try {
-            Scanner input = new Scanner(System.in);
+            Scanner input = new Scanner(System.in, "utf-8");
             this.passiveUserID = input.nextInt();
         } catch (InputMismatchException e) {
             getSelectUserID();
@@ -589,5 +624,13 @@ public class InternalBankAccounts extends DataBaseAccess {
         return this.passiveUserID;
     }
 
+    /**
+     * convert amount to string (πχ. 1,000.21€ one thousand euro and 21 cents
+     */
+    static String formatAmount(double d) {
+        NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.US);
+        String numberAsString = numberFormat.format(d);
+        return numberAsString;
+    }
 }//end InternalBankAccounts
 
