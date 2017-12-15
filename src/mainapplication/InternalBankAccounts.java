@@ -1,7 +1,6 @@
 package mainapplication;
 
 import java.sql.SQLException;
-import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.InputMismatchException;
 import java.util.Locale;
@@ -248,14 +247,12 @@ public class InternalBankAccounts extends DataBaseAccess {
     //log ActiveUserAmount
     private void insertWithdrawtLog() {
         try {
-            FileAcces logDeposit = new FileAcces();
             String query = "INSERT INTO afdemp_java_1.withdraw_log (afdemp_java_1.withdraw_log.active_user_id, afdemp_java_1.withdraw_log.passive_user_id, afdemp_java_1.withdraw_log.amount) VALUES(?, ?, ?)";
             pstmt = con.prepareStatement(query);
             pstmt.setInt(1, getActiveUserID());
             pstmt.setInt(2, getSelectUserID());
             pstmt.setDouble(3, getTransactionAmount());
             pstmt.execute();
-            logDeposit.getCreateLogFileActiveUser();
             pstmt.close();
         } catch (SQLException ex) {
             ex.printStackTrace();

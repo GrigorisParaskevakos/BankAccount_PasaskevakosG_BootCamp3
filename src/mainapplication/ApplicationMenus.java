@@ -19,7 +19,6 @@ public class ApplicationMenus {
         InternalBankAccounts myAdminAccount = new InternalBankAccounts();
         FileAcces adminLog = new FileAcces();
         adminLog.getCreateLogDirActiveUser();
-        adminLog.getCreateLogFileActiveUser();
         System.out.printf("1. View Cooperative's (super admin) internal bank account\n");
         System.out.println("2. View Member's bank accounts");
         System.out.println("3. Deposit to Member's bank accounts");
@@ -52,12 +51,12 @@ public class ApplicationMenus {
                             clearConsole();
                             myAdminAccount.getUpdatePassiveAccount();
                             myAdminAccount.getInsertDepositLog();
+                            adminLog.getCreateLogFileDeposits();
                         } else {
                             clearConsole();
                             System.out.println("\n\n*-------------------------------------------------------*");
                             System.out.println("|  NEW MESSAGE: Insaficient amount! Please retry...     |");
                             System.out.println("*-------------------------------------------------------*\n\n");
-
                         }
                     } else {
                         clearConsole();
@@ -136,7 +135,7 @@ public class ApplicationMenus {
     }
 
     /**
-     * Display simple user menu
+     * Display simple user menu 
      */
     private static void SimpleUserMenu() {
         DataBaseAccess myDB = new DataBaseAccess();
@@ -167,6 +166,7 @@ public class ApplicationMenus {
                         clearConsole();
                         myUserAccount.getUpdatePassiveAdminAccount();
                         myUserAccount.getInsertDepositLog();
+                        userLog.getCreateLogFileDeposits();
                     } else {
                         clearConsole();
                         System.out.println("\n\n*-------------------------------------------------------*");
@@ -192,7 +192,7 @@ public class ApplicationMenus {
                             clearConsole();
                             myUserAccount.getUpdatePassiveAccount();
                             myUserAccount.getInsertDepositLog();
-
+                            userLog.getCreateLogFileDeposits();
                         } else {
                             clearConsole();
                             System.out.println("\n\n*-------------------------------------------------------*");

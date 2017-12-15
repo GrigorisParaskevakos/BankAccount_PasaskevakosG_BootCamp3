@@ -74,7 +74,7 @@ public class FileAcces extends InternalBankAccounts {
     /**
      * Create files for deposits Logs
      */
-    private void createLogFileActiveUser() {
+    private void createLogFileDeposits() {
         transactionDateStamp();
         transactionDateTimeStamp();
         transactionDateTimeStampFile();
@@ -86,8 +86,9 @@ public class FileAcces extends InternalBankAccounts {
             writer = new PrintWriter(path + path2 + fileName, "UTF-8");
             writer.println("User-ID: " + getActiveUserID());
             writer.println("User Name: " + getActiveUser());
-            writer.println("Current Balance: " + getActiveUserAmount() + " €");
-            writer.println("Deposit to user with ID: " + super.getSelectUserID() + " amount of " + super.getTransactionAmount() + " €");
+            writer.println("Current Balance: " + getActiveUserAmount() + " \u20ac");
+            double t = getPassiveUserAmmount();
+            writer.println("Passive user amount: " + t + " \u20ac");
             writer.println("Transaction Date Time: " + transactionDateTimeStampFile());
             writer.close();
         } catch (UnsupportedEncodingException ex) {
@@ -98,8 +99,8 @@ public class FileAcces extends InternalBankAccounts {
         }
     }
 
-    void getCreateLogFileActiveUser() {
-        createLogFileActiveUser();
+    void getCreateLogFileDeposits() {
+        createLogFileDeposits();
     }
 
     /////////////////////////////////////////////////////
@@ -118,7 +119,7 @@ public class FileAcces extends InternalBankAccounts {
             writer = new PrintWriter(path + path2 + fileName, "UTF-8");
             writer.println("User-ID: " + getActiveUserID());
             writer.println("User Name: " + getActiveUser());
-            writer.println("Current Balance: " + getActiveUserAmount() + " €");
+            writer.println("Current Balance: " + getActiveUserAmount() + " \u20ac");
             writer.println("Withdraw from user with ID: " + super.getSelectUserID() + " amount of " + super.getTransactionAmount() + " €");
             writer.println("Transaction Date Time: " + transactionDateTimeStampFile());
             writer.close();

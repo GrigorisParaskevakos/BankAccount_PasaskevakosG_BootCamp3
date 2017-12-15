@@ -5,10 +5,7 @@
  */
 package mainapplication;
 
-/**
- *
- * @author GT780
- */
+
 public class MainApplication {
 
     public static void main(String[] args) {
