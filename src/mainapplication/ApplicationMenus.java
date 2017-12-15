@@ -1,15 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package mainapplication;
 
 import java.io.IOException;
 
 /**
  *
- * @author GT780
+ * @author Paraskevakos Grigoris
  */
 public class ApplicationMenus {
 
@@ -107,10 +102,10 @@ public class ApplicationMenus {
                 case "6":
                     DelayThread myTimeThread = new DelayThread();
                     System.out.printf("\nPrivate Banking System is shutting down");
-                    //myAdminAccount.getDropDepositsView();
-                    //myAdminAccount.getDropDepositsViewUsers();
-                    //myAdminAccount.getDropWithdrawView();
-                    //myAdminAccount.getDropWithdrawViewUsers();
+                    myAdminAccount.getDropDepositsView();
+                    myAdminAccount.getDropDepositsViewUsers();
+                    myAdminAccount.getDropWithdrawView();
+                    myAdminAccount.getDropWithdrawViewUsers();
                     for (int count = 5; count > 0; count--) {
                         System.out.printf(".");
                         myTimeThread.delay(1000);

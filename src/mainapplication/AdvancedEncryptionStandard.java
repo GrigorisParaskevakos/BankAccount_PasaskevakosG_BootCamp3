@@ -1,19 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package mainapplication;
 
 import java.util.Base64;
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 
+/**
+ *
+ * @author Paraskevakos Grigoris
+ */
+
 public class AdvancedEncryptionStandard {
 
     //Private Key 16 characters (AES-128bit)
-    private static byte[] key = { 0x7e, 0x21, 0x40, 0x23, 0x2d, 0x41, 0x45, 0x47, 0x45, 0x41, 0x4e, 0x2d, 0x23, 0x40,
-            0x21, 0x7e };
+    private static byte[] key = {0x7e, 0x21, 0x40, 0x23, 0x2d, 0x41, 0x45, 0x47, 0x45, 0x41, 0x4e, 0x2d, 0x23, 0x40, 0x21, 0x7e};
 
     /**
      * Encrypt Text

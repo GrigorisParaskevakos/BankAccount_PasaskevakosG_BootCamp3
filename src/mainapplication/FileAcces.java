@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package mainapplication;
 
 import java.io.File;
@@ -10,9 +5,13 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.text.DateFormat;
-import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+/**
+ *
+ * @author Paraskevakos Grigoris
+ */
 
 public class FileAcces extends InternalBankAccounts {
 
@@ -130,10 +129,10 @@ public class FileAcces extends InternalBankAccounts {
             String s2 = formatAmount(d2);
             writer.println("Current Balance: " + s2 + " \u20ac");
             writer.println("Action: Withdraw");
-            double d3 = 100.6;//here need info transaction ammount
+            double d3 = getAccessWithdrawAmount();
             String s3 = formatAmount(d3);
             writer.println("Transaction Amount: " + s3 + " \u20ac");
-            writer.println("Provider user-name: " + "user1");//here need info
+            writer.println("Provider user-name: " + getAccessWithdrawUser());
             writer.println("Transaction Date Time: " + transactionDateTimeStampFile());
             writer.close();
         } catch (UnsupportedEncodingException ex) {

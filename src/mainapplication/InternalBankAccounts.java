@@ -10,6 +10,10 @@ import java.util.logging.Logger;
 import static mainapplication.ApplicationMenus.clearConsole;
 import static mainapplication.DataBaseAccess.rs;
 
+/**
+ *
+ * @author Paraskevakos Grigoris
+ */
 public class InternalBankAccounts extends DataBaseAccess {
 
     private int passiveUserID;
@@ -111,14 +115,55 @@ public class InternalBankAccounts extends DataBaseAccess {
         }
         return this.transactionAmount;
     }
+    //acces this F amount
 
     double getAccessDepositAmount() {
         accessDepositAmount();
         return this.transactionAmount;
     }
 
-    ///////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////
+    /**
+     * return receiver from withdraw_users view
+     */
+    private String accessWithdrawUser() {
+        try {
+            String q = "SELECT  afdemp_java_1.withdraw_view_users.provider FROM afdemp_java_1.withdraw_view_users";
+            rs = stmt.executeQuery(q);
+            if (rs.next()) {
+                this.passiveUser = rs.getString(1);
+            }
+        } catch (SQLException ex) {
+            System.out.println("View withdraw failed");
+        }
+        return this.passiveUser;
+    }
+
+    String getAccessWithdrawUser() {
+        accessWithdrawUser();
+        return this.passiveUser;
+    }
+
+    /**
+     * return transaction amount from deposit_users view
+     */
+    private double accessWithdawAmount() {
+        try {
+            String q = "SELECT  afdemp_java_1.withdraw_view_users.amount FROM afdemp_java_1.withdraw_view_users";
+            rs = stmt.executeQuery(q);
+            if (rs.next()) {
+                this.transactionAmount = rs.getDouble(1);
+            }
+        } catch (SQLException ex) {
+            System.out.println("View withdraw failed");
+        }
+        return this.transactionAmount;
+    }
+
+    double getAccessWithdrawAmount() {
+        accessWithdawAmount();
+        return this.transactionAmount;
+    }
+
     /**
      * Super Admin view Simple Users account
      */
@@ -259,8 +304,6 @@ public class InternalBankAccounts extends DataBaseAccess {
     void getUpdateActiveAccount() {
         updateActiveAccount();
     }
-//////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////
 
     //log ActiveUserAmount
     private void insertDepositLog() {
@@ -304,8 +347,6 @@ public class InternalBankAccounts extends DataBaseAccess {
     void getInsertWithdrawtLog() {
         insertWithdrawtLog();
     }
-//////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////
 
     /**
      * Create Views for deposits
@@ -451,38 +492,6 @@ public class InternalBankAccounts extends DataBaseAccess {
         dropWithdrawViewUsers();
     }
 
-////////////////////////////////////////////////////////    
-////////////////////////////////////////////////////////
-    /**
-     * read data from today's transactions, call class DepositLog
-     */
-//    public static ArrayList<DepositLog> getAllDepositLog() throws ClassNotFoundException, SQLException {
-//        stmt = con.createStatement();
-//        String sql = "select * from deposits_view_users";
-//        rs = stmt.executeQuery(sql);
-//        ArrayList<DepositLog> dataList = new ArrayList<>();
-//        while (rs.next()) {
-//            DepositLog myDepositLog = new DepositLog(rs.getString("balance_provider"), rs.getDouble("amount"), rs.getString("balance_receiver"), rs.getDate("transaction_date_time"));
-//            dataList.add(myDepositLog);
-//        }
-//        return dataList;
-//    }
-//
-//    public String dataListToString(ArrayList<DepositLog> list) {
-//        String result = "+";
-//        try {
-//            for (int i = 0; i < getAllDepositLog().size(); i++) {
-//                result += " " + getAllDepositLog().get(i);
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            Logger.getLogger(InternalBankAccounts.class.getName()).log(Level.SEVERE, null, ex);
-//        } catch (SQLException ex) {
-//            Logger.getLogger(InternalBankAccounts.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        return result;
-//    }
-    ////////////////////////////////////////////////////////    
-    ////////////////////////////////////////////////////////   
     // get PassiveUserAmount
     private double tempCheckPassiveUserAmount() {
         try {

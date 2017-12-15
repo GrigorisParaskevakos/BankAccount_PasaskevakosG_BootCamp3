@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package mainapplication;
 
 import java.sql.Connection;
@@ -14,7 +9,7 @@ import java.sql.Statement;
 
 /**
  *
- * @author GT780
+ * @author Paraskevakos Grigoris
  */
 public class DataBaseAccess {
 
@@ -58,7 +53,6 @@ public class DataBaseAccess {
             System.out.println("connected to DB afdemp_java_1\n");
             System.out.println("Private Banking System is running...\n");
         } catch (SQLException ex) {
-            //Logger.getLogger(DataBaseAccess.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("DB connection went wrong");
         }
     }//end dbConnect
@@ -120,7 +114,6 @@ public class DataBaseAccess {
             //check if user exists
             while (flag1 == false) {
                 myLogin.getuserCredentials();
-                //String sql = "SELECT accounts.user_id, users.username, users.password, accounts.amount FROM afdemp_java_1.users,afdemp_java_1.accounts  WHERE username = '" + myLogin.getusername() + "' AND password ='" + myLogin.getpassword() + "'  AND accounts.user_id = users.id";
                 String sql = "SELECT accounts.user_id, users.username, users.password, accounts.amount FROM afdemp_java_1.users,afdemp_java_1.accounts  WHERE username = ? AND password = ? AND accounts.user_id = users.id";
                 try {
                     pstmt = con.prepareStatement(sql);
