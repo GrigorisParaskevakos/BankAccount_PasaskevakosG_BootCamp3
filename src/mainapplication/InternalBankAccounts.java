@@ -16,6 +16,8 @@ public class InternalBankAccounts extends DataBaseAccess {
     private double passiveUserAmount;
     static double tempAmount;
     private double userInputAmount;
+    private static Double transactionAmount;
+    private static String passiveUser;
 
     //Admin View Cooperative's (super admin) internal bank account
     private String sql = "SELECT afdemp_java_1.users.id, afdemp_java_1.users.username, afdemp_java_1.accounts.amount, afdemp_java_1.accounts.transaction_date FROM afdemp_java_1.users, afdemp_java_1.accounts WHERE afdemp_java_1.users.id = afdemp_java_1.accounts.user_id AND afdemp_java_1.users.id =1";
@@ -47,10 +49,8 @@ public class InternalBankAccounts extends DataBaseAccess {
         this.accessAdminAccount();
     }
 
-    ///////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////
     /**
-     * get views results
+     * get views results Deposits
      */
     private void accessDepositViewUsers() {
         try {
@@ -68,12 +68,53 @@ public class InternalBankAccounts extends DataBaseAccess {
             }
         } catch (SQLException ex) {
             System.out.println("View deposit failed");
-            //Logger.getLogger(DataBaseAccess.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     void getAccessDepositViewUsers() {
         this.accessDepositViewUsers();
+    }
+
+    /**
+     * return receiver from deposit_users view
+     */
+    private String accessPassiveUser() {
+        try {
+            String q = "SELECT  afdemp_java_1.deposits_view_users.receiver FROM afdemp_java_1.deposits_view_users";
+            rs = stmt.executeQuery(q);
+            if (rs.next()) {
+                this.passiveUser = rs.getString(1);
+            }
+        } catch (SQLException ex) {
+            System.out.println("View deposit failed");
+        }
+        return this.passiveUser;
+    }
+
+    String getAccessPassiveUser() {
+        accessPassiveUser();
+        return this.passiveUser;
+    }
+
+    /**
+     * return transaction amount from deposit_users view
+     */
+    private double accessDepositAmount() {
+        try {
+            String q = "SELECT  afdemp_java_1.deposits_view_users.amount FROM afdemp_java_1.deposits_view_users";
+            rs = stmt.executeQuery(q);
+            if (rs.next()) {
+                this.transactionAmount = rs.getDouble(1);
+            }
+        } catch (SQLException ex) {
+            System.out.println("View deposit failed");
+        }
+        return this.transactionAmount;
+    }
+
+    double getAccessDepositAmount() {
+        accessDepositAmount();
+        return this.transactionAmount;
     }
 
     ///////////////////////////////////////////////////////////////////////////////
@@ -578,6 +619,10 @@ public class InternalBankAccounts extends DataBaseAccess {
     //set passiveUserAmount
     void setPassiveUserAmount(double passiveUserAmount) {
         this.passiveUserAmount = passiveUserAmount;
+    }
+
+    double getPassiveUserAmount() {
+        return this.passiveUserAmount;
     }
 
     private boolean checkPassiveUserAmount() {

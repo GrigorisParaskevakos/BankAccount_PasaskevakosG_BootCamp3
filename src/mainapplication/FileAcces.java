@@ -87,11 +87,15 @@ public class FileAcces extends InternalBankAccounts {
         try {
             writer = new PrintWriter(path + path2 + fileName, "UTF-8");
             writer.println("User-ID: " + getActiveUserID());
-            writer.println("User Name: " + getActiveUser());
-            double d = getActiveUserAmount();
-            String s = formatAmount(d);
-            writer.println("Current Balance: " + s + " \u20ac");
+            writer.println("Provider user-name: " + getActiveUser());
+            double d2 = getActiveUserAmount();
+            String s2 = formatAmount(d2);
+            writer.println("Current Balance: " + s2 + " \u20ac");
             writer.println("Action: Deposit");
+            double d = getAccessDepositAmount();
+            String s = formatAmount(d);
+            writer.println("Transaction Amount: " + s + " \u20ac");
+            writer.println("Receiver user-name: " + getAccessPassiveUser());
             writer.println("Transaction Date Time: " + transactionDateTimeStampFile());
             writer.close();
         } catch (UnsupportedEncodingException ex) {
@@ -121,11 +125,15 @@ public class FileAcces extends InternalBankAccounts {
         try {
             writer = new PrintWriter(path + path2 + fileName, "UTF-8");
             writer.println("User-ID: " + getActiveUserID());
-            writer.println("User Name: " + getActiveUser());
+            writer.println("Receiver user-name: " + getActiveUser());
             double d2 = getActiveUserAmount();
             String s2 = formatAmount(d2);
             writer.println("Current Balance: " + s2 + " \u20ac");
             writer.println("Action: Withdraw");
+            double d3 = 100.6;//here need info transaction ammount
+            String s3 = formatAmount(d3);
+            writer.println("Transaction Amount: " + s3 + " \u20ac");
+            writer.println("Provider user-name: " + "user1");//here need info
             writer.println("Transaction Date Time: " + transactionDateTimeStampFile());
             writer.close();
         } catch (UnsupportedEncodingException ex) {
