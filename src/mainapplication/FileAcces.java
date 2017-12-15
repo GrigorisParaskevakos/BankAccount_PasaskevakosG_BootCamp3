@@ -63,7 +63,7 @@ public class FileAcces extends InternalBankAccounts {
             if (f.mkdirs()) {
                 System.out.println("\n\n*----------------------------------------*");
                 System.out.println("|  Directory for Statements Created!     |");
-                System.out.println("|  Path: C:\\Today's_Statements          |");
+                System.out.println("|  Path: C:\\Today's_Statements           |");
                 System.out.println("*----------------------------------------*\n\n");
             }
         }
