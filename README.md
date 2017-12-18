@@ -3,7 +3,7 @@
 # Author @Paraskevakos Grigoris
 
 #Setup for OS Windows
-#All files are inside BankAccount_Pasaskevakos_Grigors_BootCamp3
+#All files are inside BankAccount_PasaskevakosG_BootCamp3
 
 #Requirements :
 
