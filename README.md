@@ -11,7 +11,7 @@
 
 # Windows OS
 
-######################################################################################################
+#############################################################################################
 
 #Definition
 You are required to build a Windows console application where you will be asked to read
@@ -41,11 +41,11 @@ the toString() of the class BankAccount in order to show the user’s username,
 transaction date, amount. Format all currency data to be displayed and written to file
 with Locale(“el-GR”). Format all dates to the form “yyyy-MM-dd HH:mm:ss.SSS”. 
 
-######################################################################################################
+#############################################################################################
 
 PS. Do not forget to open and RUN MySQL DB (MySQL Notifier)
 
-######################################################################################################
+#############################################################################################
 
 # I F YOU HAVE MySQL & MySQLWorkbench installed do:
 
@@ -73,7 +73,7 @@ Credentials:1) admin
     --open "mysql_How_to_install.html" and follow steps!
     --then return to #A)
 
-######################################################################################################
+#############################################################################################
 **_HOW THIS PROJECT DEPLOYED_**
 
     I) Message: java.lang.ClassNotFoundException: com.mysql.jdbc.Driver
@@ -83,11 +83,11 @@ Credentials:1) admin
     3-Press Shift + F11. (Clean and Build)
     4-Run
 
-######################################################################################################
+#############################################################################################
 II) in order to run :
 mysql-connector.jar | Paste to : C:\Program Files\Java\jre1.8.0_151\lib\ext
 
-######################################################################################################
+#############################################################################################
 **_IRRELEVANT to IDE_(NetBeans)**
 III) to compile and Run (Windows):
 (inside the Project's working directory)
@@ -101,7 +101,7 @@ III) to compile and Run (Windows):
         to run the APP:
         3- java -jar MainApplication
 
-######################################################################################################
+#############################################################################################
 
     IV) to make an executable .bat file :
     (inside the Project's directory)
@@ -115,8 +115,8 @@ III) to compile and Run (Windows):
         4- rename the file from .txt to .bat
         5- Run the file.bat
 
-######################################################################################################
+#############################################################################################
 
 PS. Do not forget to open and RUN MySQL DB (MySQL Notifier)
 
-######################################################################################################
+#############################################################################################
