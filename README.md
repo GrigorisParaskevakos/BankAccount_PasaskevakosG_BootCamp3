@@ -13,6 +13,34 @@
 
 ######################################################################################################
 
+#Definition
+You are required to build a Windows console application where you will be asked to read
+various inputs from the keyboard.
+These inputs will be used as login details and actions in order to control the internal banking
+system of a cooperative company.
+Each input will be used for directing the various subsystems of this private banking system.
+The output of the various subsystems will be displayed to the screen or it will be written to
+simple text files.
+#Deliverables
+You are requested to produce a Java console application that has the following:
+1. Six (6) .java files, the main application and one file per Logical Unit of the application
+as described above on A. 
+2. The Login Screen should be displayed first and it should let the user view the
+application’s main menu after correct input of the username / password combination
+which are checked against the values stored in the database table users 
+3. The application’s main menu should be changed depending the level of the user as
+described above on B.2. 
+4. The application should let the super admin to view all the accounts and deposit or
+withdraw from the simple users’ bank accounts while keeping all actions to memory
+and write to statement file via Send Today’s Statement
+5. The application should let the simple users to deposit to the cooperative’s bank
+account an amount that is available to his bank account while keeping all actions to
+memory and write to statement file via Send Today’s Statement 
+6. Use the class BankAccounts as an intermediate storage for database’s data. Override
+the toString() of the class BankAccount in order to show the user’s username,
+transaction date, amount. Format all currency data to be displayed and written to file
+with Locale(“el-GR”). Format all dates to the form “yyyy-MM-dd HH:mm:ss.SSS”. 
+
 ######################################################################################################
 
 PS. Do not forget to open and RUN MySQL DB (MySQL Notifier)
