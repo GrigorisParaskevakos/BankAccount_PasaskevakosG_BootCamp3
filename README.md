@@ -32,7 +32,7 @@ PS. Do not forget to open and RUN MySQL DB (MySQL Notifier)
 --SETUP (STEP2)
 --CLOSE WORKBENCH
 THEN:
----Just open "BankAccounts.bat" and make Run the Application "
+---Just open "BankAccounts.bat" and Run the Application, it is ready and compiled :)
 Credentials:1) admin
                admin
             2) user1
