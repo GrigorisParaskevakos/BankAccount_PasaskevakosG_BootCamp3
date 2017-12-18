@@ -11,8 +11,13 @@ import javax.crypto.spec.SecretKeySpec;
 
 public class AdvancedEncryptionStandard {
 
-    //Private Key 16 characters (AES-128bit)
-    private static byte[] key = {0x7e, 0x21, 0x40, 0x23, 0x2d, 0x41, 0x45, 0x47, 0x45, 0x41, 0x4e, 0x2d, 0x23, 0x40, 0x21, 0x7e};
+    /*Private Key 16 characters (AES-128bit), 
+   *                OR 
+   * you can make your own here: String to hex ( https://www.theproblemsite.com/reference/mathematics/codes/hexadecimal-code ) 
+   * reverse check here: ( http://string-functions.com/hex-string.aspx )
+   * BUT remember: The length must be 16 character, 8bit/character = 128bit
+   * */
+  private static byte[] key = {0x68, 0x61, 0x70, 0x70, 0x79, 0x6e, 0x65, 0x77, 0x79, 0x65, 0x61, 0x72, 0x68, 0x6f, 0x68, 0x6f }; //happynewyearhoho  in hexcode
 
     /**
      * Encrypt Text

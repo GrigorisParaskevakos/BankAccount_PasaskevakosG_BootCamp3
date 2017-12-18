@@ -33,6 +33,12 @@ PS. Do not forget to open and RUN MySQL DB (MySQL Notifier)
 --CLOSE WORKBENCH
 THEN:
 ---Just open "BankAccounts.bat" and make Run the Application "
+Credentials:1) admin
+               admin
+            2) user1
+               password1
+            3) user2 
+               password2
 
 # E L S E do:
 
