@@ -21,7 +21,7 @@ system of a cooperative company.
 Each input will be used for directing the various subsystems of this private banking system.
 The output of the various subsystems will be displayed to the screen or it will be written to
 simple text files.
-#Deliverables
+#User Requirements
 You are requested to produce a Java console application that has the following:
 1. Six (6) .java files, the main application and one file per Logical Unit of the application
 as described above on A. 
@@ -47,7 +47,7 @@ PS. Do not forget to open and RUN MySQL DB (MySQL Notifier)
 
 ######################################################################################################
 
-# I F YOU HAVE MySQL installed do:
+# I F YOU HAVE MySQL & MySQLWorkbench installed do:
 
 #A)
 --open Folder: "Create_Connection_Steps" and follow steps till STEPS
